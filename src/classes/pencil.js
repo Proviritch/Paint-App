@@ -23,24 +23,19 @@ export class Pencil {
 
     start() {
         canvas1.addEventListener('touchmove', e => {
-            console.warn(isEraser)
-            if(isEraser) {
-                console.log('borrar')
-                ctx.clearRect(e.changedTouches[0].clientX,e.changedTouches[0].clientY,20,20);
-            } else {
-                ctx.lineWidth = 10;
-                ctx.lineCap = 'round';
+
+            ctx.lineWidth = 10;
+            ctx.lineCap = 'round';
     
-                line.push({
-                    x: e.changedTouches[0].clientX,
-                    y: e.changedTouches[0].clientY
-                })
+            line.push({
+                x: e.changedTouches[0].clientX,
+                y: e.changedTouches[0].clientY
+            })
                 
-                ctx.lineTo(e.changedTouches[0].clientX,e.changedTouches[0].clientY);
-                ctx.stroke();
-                ctx.beginPath();
-                ctx.moveTo(e.changedTouches[0].clientX,e.changedTouches[0].clientY);
-            }
+            ctx.lineTo(e.changedTouches[0].clientX,e.changedTouches[0].clientY);
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.moveTo(e.changedTouches[0].clientX,e.changedTouches[0].clientY);
             //console.log('EEHH')
 
     });
@@ -50,18 +45,11 @@ export class Pencil {
 
     end() {
         //console.log('FIIIN')
-        if(isEraser) {
-            return
-        } else {
             line[line.length-1].beginPath = true;
             ctx.beginPath();
-        }
-
     }
 
-    draw(x) {
-        isEraser = x;
-        console.log(isEraser)
+    draw() {
         //console.log('ahhhh')
         canvas1.addEventListener('touchstart', this.start);
         //canvas.addEventListener('mousedown', this.start);

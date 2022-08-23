@@ -13,7 +13,7 @@ for(let i = 0; i < canvas.length; i++) {
 
 
 
-let strategies = [new Pencil(), new Square(), new Circle(), new Line()];
+let strategies = [new Pencil(), new Square(), new Circle(), new Line(), new Eraser()];
 
 class Draw {
     constructor(strategy) {
@@ -24,8 +24,8 @@ class Draw {
         this.strategy = strategy;
     }
 
-    draw(x) {
-        return this.strategy.draw(x);
+    draw() {
+        return this.strategy.draw();
     }
 
 }
@@ -36,19 +36,8 @@ let section = document.querySelector('section');
 
 const selectOption = (option) => {
     section.children[option].addEventListener('click', e => {
-        //console.log('grrrrrrrrrrrrr')
-        for(let i = 0; i < canvas.length; i++) {
-            canvas[i].classList.add('notSelected');
-        } 
-        canvas[option].classList.remove('notSelected');
-    
         draw.changeStrategy(strategies[e.target.attributes[0].nodeValue]);
-        draw.draw(false);
-
-        //Eraser
-        section.children[section.children.length-1].addEventListener('click', e => {
-            draw.draw(true);
-        })
+        draw.draw();
     })
 }
 
@@ -65,6 +54,8 @@ section.addEventListener('click', (e) => {
     selectOption(2);
     //Line drawing
     selectOption(3);
+    //Eraser
+    selectOption(4);
 
 /*     //Free drawing
     section.children[0].addEventListener('click', e => {

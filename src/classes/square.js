@@ -2,8 +2,6 @@ import { line } from './pencil.js'
 const canvas2 = document.getElementById('canvas2');
 const ctx = canvas2.getContext('2d');
 
-let isEraser;
-
 let x;
 let y;
 let width;
@@ -31,27 +29,6 @@ export class Square {
     }
 
     drawRectModel(e) {
-
-
-        if(isEraser) {
-            console.log('ahaahshh')
-            /* x=e.offsetX;
-            y=e.offsetY; */
-            x = e.changedTouches[0].clientX;
-            y = e.changedTouches[0].clientY;
-            width = 20;
-            height = 20;
-            console.log(x,y,width,height);
-            ctx.beginPath();
-            ctx.clearRect(x,y,width,height);
-            rectangles.push({
-                x: x,
-                y: y,
-                width: width,
-                height: height,
-                eraser: true
-                })//////ME QUEDÉ AQUÍ
-        } else {
             //console.log(e.changedTouches[0].clientX);
             /* width=e.offsetX-x;
             height=e.offsetY-y; */
@@ -63,24 +40,15 @@ export class Square {
             ctx.clearRect(0,0,canvas2.width,canvas2.height);
             ctx.rect(x,y,width,height);
             ctx.stroke();
-        }
-
         
         rectangles.forEach(element => {
             //console.log(x)
-            if(element.eraser) {
-                console.log(element.x,element.y,element.width,element.height)
-                ctx.beginPath();
-                ctx.clearRect(element.x,element.y,element.width,element.height);
-            } else {
                 element.shape();
-            }
         })
 
     }
 
-    draw(tf) {
-        isEraser = tf;
+    draw() {
         canvas2.addEventListener('touchstart', e => {
 /*             x=e.offsetX;
             y=e.offsetY; */
@@ -90,10 +58,8 @@ export class Square {
         });
         
         canvas2.addEventListener('touchend', () => {
-            if(!isEraser) {
-                rectangles.push(new Square(x,y,width,height));
-                ctx.beginPath();
-            }
+            rectangles.push(new Square(x,y,width,height));
+            ctx.beginPath();
         })
     }
 }

@@ -1,7 +1,9 @@
-const canvas1 = document.getElementById('canvas1');
+const canvas1 = document.getElementById('draws_displayed');
 const ctx = canvas1.getContext('2d');
 
-let isEraser;
+const playground = document.getElementById('playground');
+
+
 export const line = [];
 
 export class Pencil {
@@ -22,7 +24,7 @@ export class Pencil {
     } */
 
     start() {
-        canvas1.addEventListener('touchmove', e => {
+        playground.addEventListener('touchmove', e => {
 
             ctx.lineWidth = 10;
             ctx.lineCap = 'round';
@@ -51,9 +53,9 @@ export class Pencil {
 
     draw() {
         //console.log('ahhhh')
-        canvas1.addEventListener('touchstart', this.start);
+        playground.addEventListener('touchstart', this.start);
         //canvas.addEventListener('mousedown', this.start);
-        canvas1.addEventListener('touchend', this.end);
+        playground.addEventListener('touchend', this.end);
         //canvas.addEventListener('mouseup', this.end);
     }
 

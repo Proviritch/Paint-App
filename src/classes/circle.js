@@ -1,6 +1,8 @@
 
-const canvas3 = document.getElementById('canvas3');
-const ctx = canvas3.getContext('2d');
+const canvas1 = document.getElementById('draws_displayed');
+const ctx = canvas1.getContext('2d');
+
+const playground = document.getElementById('playground');
 
 let x;
 let y;
@@ -30,7 +32,7 @@ export class Circle {
         radiusY = Math.abs(e.changedTouches[0].clientY-y);
         ctx.beginPath(); //IMPORTANTÍSIMO EL BEGINPATH
         ctx.lineWidth = 10;
-        ctx.clearRect(0,0,canvas3.width,canvas3.height);
+        ctx.clearRect(0,0,canvas1.width,canvas1.height);
         ctx.ellipse(x,y,radiusX,radiusY,0,0,Math.PI*2,false);
         ctx.stroke();
 
@@ -40,13 +42,13 @@ export class Circle {
     }
 
     draw() {
-        canvas3.addEventListener('touchstart', e => {
+        playground.addEventListener('touchstart', e => {
             x = e.changedTouches[0].clientX;
             y = e. changedTouches[0].clientY;
-            canvas3.addEventListener('touchmove', this.drawCircleModel);
+            playground.addEventListener('touchmove', this.drawCircleModel);
         })
 
-        canvas3.addEventListener('touchend', () => {
+        playground.addEventListener('touchend', () => {
             circles.push(new Circle(x,y,radiusX,radiusY));
             ctx.beginPath();
         })

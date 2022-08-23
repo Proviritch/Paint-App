@@ -1,6 +1,8 @@
 
-const canvas4 = document.getElementById('canvas4');
-const ctx = canvas4.getContext('2d');
+const canvas1 = document.getElementById('draws_displayed');
+const ctx = canvas1.getContext('2d');
+
+const playground = document.getElementById('playground');
 
 let xI, xF;
 let yI, yF;
@@ -27,7 +29,7 @@ export class Line {
         xF = e.changedTouches[0].clientX;
         yF = e.changedTouches[0].clientY;
 
-        ctx.clearRect(0,0,canvas4.width,canvas4.height);
+        ctx.clearRect(0,0,canvas1.width,canvas1.height);
         ctx.beginPath(); //IMPORTANTÍSIMO EL BEGINPATH
         ctx.lineWidth = 10;
         ctx.moveTo(xI,yI);
@@ -40,14 +42,14 @@ export class Line {
     }
 
     draw() {
-        canvas4.addEventListener('touchstart', e => {
+        playground.addEventListener('touchstart', e => {
             xI = e.changedTouches[0].clientX;
             yI = e. changedTouches[0].clientY;
 
-            canvas4.addEventListener('touchmove', this.drawLineModel);
+            playground.addEventListener('touchmove', this.drawLineModel);
         })
 
-        canvas4.addEventListener('touchend', () => {
+        playground.addEventListener('touchend', () => {
             lines.push(new Line(xI,yI,xF,yF));
             ctx.beginPath();
         })

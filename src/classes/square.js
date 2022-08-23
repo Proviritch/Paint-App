@@ -1,6 +1,8 @@
 import { line } from './pencil.js'
-const canvas2 = document.getElementById('canvas2');
-const ctx = canvas2.getContext('2d');
+const canvas1 = document.getElementById('draws_displayed');
+const ctx = canvas1.getContext('2d');
+
+const playground = document.getElementById('playground');
 
 let x;
 let y;
@@ -37,7 +39,7 @@ export class Square {
             //console.log(width, height);
             ctx.beginPath(); //IMPORTANTÍSIMO EL BEGINPATH
             ctx.lineWidth = 10;
-            ctx.clearRect(0,0,canvas2.width,canvas2.height);
+            ctx.clearRect(0,0,canvas1.width,canvas1.height);
             ctx.rect(x,y,width,height);
             ctx.stroke();
         
@@ -49,15 +51,15 @@ export class Square {
     }
 
     draw() {
-        canvas2.addEventListener('touchstart', e => {
+        playground.addEventListener('touchstart', e => {
 /*             x=e.offsetX;
             y=e.offsetY; */
             x = e.changedTouches[0].clientX;
             y = e. changedTouches[0].clientY;
-            canvas2.addEventListener('touchmove', this.drawRectModel);
+            playground.addEventListener('touchmove', this.drawRectModel);
         });
         
-        canvas2.addEventListener('touchend', () => {
+        playground.addEventListener('touchend', () => {
             rectangles.push(new Square(x,y,width,height));
             ctx.beginPath();
         })

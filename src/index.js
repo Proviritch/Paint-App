@@ -13,7 +13,7 @@ for(let i = 0; i < canvas.length; i++) {
 
 
 
-let strategies = [new Pencil(), new Square(), new Circle(), new Line(), new Eraser()];
+let strategies = [new Pencil(), new Square(), new Circle(), new Line()];
 
 class Draw {
     constructor(strategy) {

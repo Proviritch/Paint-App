@@ -52,6 +52,7 @@ export class Square {
     }
 
     drawEnd() {
+        ctx2.clearRect(0,0,canvas1.width,canvas1.height);
         rectangles.push(new Square(x,y,width,height));
         ctx.beginPath();
         ctx.lineWidth = 10;

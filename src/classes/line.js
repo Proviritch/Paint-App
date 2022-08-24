@@ -44,6 +44,7 @@ export class Line {
     }
 
     drawEnd() {
+        ctx2.clearRect(0,0,canvas1.width,canvas1.height);
         lines.push(new Line(xI,yI,xF,yF));
         ctx.beginPath();
         ctx.lineCap = 'square';

@@ -1,7 +1,7 @@
 //import { saludar } from './js/componentes';
 /* import { Pencil } from './classes/pencil';
 import { Square } from './classes/square'; */
-import { Pencil, Square, Circle, Line } from '/src/classes/export_classes.js'
+import { Pencil, Square, Circle, Line, Eraser } from '/src/classes/export_classes.js'
 import './styles.css'
 //import { Circle } from './classes/circle';
 
@@ -14,7 +14,7 @@ const playground = canvas[1];
 
 
 
-let strategies = [new Pencil(), new Square(), new Circle(), new Line()];
+let strategies = [new Pencil(), new Square(), new Circle(), new Line(), new Eraser()];
 
 class Draw {
     constructor(strategy) {

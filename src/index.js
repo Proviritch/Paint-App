@@ -10,6 +10,7 @@ for(let i = 0; i < canvas.length; i++) {
     canvas[i].width = window.innerWidth;
     canvas[i].height = window.innerHeight;
 }
+const playground = canvas[1];
 
 
 
@@ -24,8 +25,16 @@ class Draw {
         this.strategy = strategy;
     }
 
-    draw() {
-        return this.strategy.draw();
+    draw(e) {
+        return this.strategy.draw(e);
+    }
+
+    drawEnd() {
+        return this.strategy.drawEnd();
+    }
+
+    drawStart(ev) {
+        return this.strategy.drawStart(ev);
     }
 
 }
@@ -35,9 +44,22 @@ const draw = new Draw();
 let section = document.querySelector('section');
 
 const selectOption = (option) => {
+
     section.children[option].addEventListener('click', e => {
         draw.changeStrategy(strategies[e.target.attributes[0].nodeValue]);
-        draw.draw();
+
+        playground.addEventListener('touchstart', ev => {
+            draw.drawStart(ev);
+            playground.addEventListener('touchmove', e => {
+                draw.draw(e);
+            })
+        })
+
+        playground.addEventListener('touchend', e => {
+            draw.drawEnd();
+        })
+
+        
     })
 }
 
@@ -56,65 +78,6 @@ section.addEventListener('click', (e) => {
     selectOption(3);
     //Eraser
     selectOption(4);
-
-/*     //Free drawing
-    section.children[0].addEventListener('click', e => {
-        //console.log('grrrrrrrrrrrrr')
-        for(let i = 0; i < canvas.length; i++) {
-            //canvas[i].classList.remove('selected');
-            canvas[i].classList.add('notSelected');
-        } 
-        canvas[0].classList.remove('notSelected');
-        //canvas[0].classList.add('selected');
-    
-        draw.changeStrategy(strategies[e.target.attributes[0].nodeValue]);
-        draw.draw();
-    })
-    
-    //Squares drawing
-    section.children[1].addEventListener('click', e => {
-        //console.log('brrrrrrrrrrrrr')
-        for(let i = 0; i < canvas.length; i++) {
-            //canvas[i].classList.remove('selected');
-            canvas[i].classList.add('notSelected');
-        } 
-        canvas[1].classList.remove('notSelected');
-        //canvas[1].classList.add('selected');
-    
-        draw.changeStrategy(strategies[e.target.attributes[0].nodeValue]);
-        //console.log(strategies[e.target.attributes[0].nodeValue]);
-        draw.draw();
-    })
-
-    //Circles drawing
-    section.children[2].addEventListener('click', e => {
-        for(let i = 0; i < canvas.length; i++) {
-            //canvas[i].classList.remove('selected');
-            canvas[i].classList.add('notSelected');
-        } 
-        canvas[2].classList.remove('notSelected');
-        //canvas[1].classList.add('selected');
-    
-        draw.changeStrategy(strategies[e.target.attributes[0].nodeValue]);
-        //console.log(strategies[e.target.attributes[0].nodeValue]);
-        draw.draw();
-    })
-
-    //Lines drawing
-    section.children[3].addEventListener('click', e => {
-        for(let i = 0; i < canvas.length; i++) {
-            //canvas[i].classList.remove('selected');
-            canvas[i].classList.add('notSelected');
-        } 
-        canvas[3].classList.remove('notSelected');
-        //canvas[1].classList.add('selected');
-    
-        draw.changeStrategy(strategies[e.target.attributes[0].nodeValue]);
-        //console.log(strategies[e.target.attributes[0].nodeValue]);
-        draw.draw();
-    }) */
-
-
 
 })
 

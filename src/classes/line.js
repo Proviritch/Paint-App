@@ -3,6 +3,7 @@ const canvas1 = document.getElementById('draws_displayed');
 const ctx = canvas1.getContext('2d');
 
 const playground = document.getElementById('playground');
+const ctx2 = playground.getContext('2d');
 
 let xI, xF;
 let yI, yF;
@@ -25,34 +26,37 @@ export class Line {
         ctx.stroke();
     }
 
-    drawLineModel(e) {
+    draw(e) {
         xF = e.changedTouches[0].clientX;
         yF = e.changedTouches[0].clientY;
 
-        ctx.clearRect(0,0,canvas1.width,canvas1.height);
-        ctx.beginPath(); //IMPORTANTÍSIMO EL BEGINPATH
+        ctx2.clearRect(0,0,canvas1.width,canvas1.height);
+        ctx2.beginPath(); //IMPORTANTÍSIMO EL BEGINPATH
+        ctx.lineCap = 'square';
+        ctx2.lineWidth = 10;
+        ctx2.moveTo(xI,yI);
+        ctx2.lineTo(xF,yF);
+        ctx2.stroke();
+
+        /* lines.forEach(x => {
+            x.shape();
+        }) */
+    }
+
+    drawEnd() {
+        lines.push(new Line(xI,yI,xF,yF));
+        ctx.beginPath();
+        ctx.lineCap = 'square';
         ctx.lineWidth = 10;
         ctx.moveTo(xI,yI);
         ctx.lineTo(xF,yF);
         ctx.stroke();
-
-        lines.forEach(x => {
-            x.shape();
-        })
+        ctx.beginPath();
     }
 
-    draw() {
-        playground.addEventListener('touchstart', e => {
-            xI = e.changedTouches[0].clientX;
-            yI = e. changedTouches[0].clientY;
-
-            playground.addEventListener('touchmove', this.drawLineModel);
-        })
-
-        playground.addEventListener('touchend', () => {
-            lines.push(new Line(xI,yI,xF,yF));
-            ctx.beginPath();
-        })
+    drawStart(ev) {
+        xI = ev.changedTouches[0].clientX;
+        yI = ev.changedTouches[0].clientY;
     }
 
 }

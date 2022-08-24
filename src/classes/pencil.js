@@ -7,55 +7,35 @@ const playground = document.getElementById('playground');
 export const line = [];
 
 export class Pencil {
-/*     shape(e) {
-        console.log('EEHH')
+
+    draw(e) {
+
         ctx.lineWidth = 10;
         ctx.lineCap = 'round';
-
+    
         line.push({
             x: e.changedTouches[0].clientX,
             y: e.changedTouches[0].clientY
-        })        
-        
+        })
+                
         ctx.lineTo(e.changedTouches[0].clientX,e.changedTouches[0].clientY);
         ctx.stroke();
         ctx.beginPath();
         ctx.moveTo(e.changedTouches[0].clientX,e.changedTouches[0].clientY);
-    } */
 
-    start() {
-        playground.addEventListener('touchmove', e => {
-
-            ctx.lineWidth = 10;
-            ctx.lineCap = 'round';
-    
-            line.push({
-                x: e.changedTouches[0].clientX,
-                y: e.changedTouches[0].clientY
-            })
-                
-            ctx.lineTo(e.changedTouches[0].clientX,e.changedTouches[0].clientY);
-            ctx.stroke();
-            ctx.beginPath();
-            ctx.moveTo(e.changedTouches[0].clientX,e.changedTouches[0].clientY);
-            //console.log('EEHH')
-
-    });
-        //canvas.addEventListener('mousemove', this.shape);
-        //console.log('UUUUUH')
     }
 
-    end() {
+    drawEnd() {
         //console.log('FIIIN')
             line[line.length-1].beginPath = true;
             ctx.beginPath();
     }
 
-    draw() {
+    drawStart(ev) {
         //console.log('ahhhh')
-        playground.addEventListener('touchstart', this.start);
+        //playground.addEventListener('touchstart', this.start);
         //canvas.addEventListener('mousedown', this.start);
-        playground.addEventListener('touchend', this.end);
+        //playground.addEventListener('touchend', this.end);
         //canvas.addEventListener('mouseup', this.end);
     }
 

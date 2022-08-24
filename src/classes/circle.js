@@ -3,6 +3,7 @@ const canvas1 = document.getElementById('draws_displayed');
 const ctx = canvas1.getContext('2d');
 
 const playground = document.getElementById('playground');
+const ctx2 = playground.getContext('2d');
 
 let x;
 let y;
@@ -27,31 +28,32 @@ export class Circle {
         ctx.stroke();
     }
 
-    drawCircleModel(e) {
+    draw(e) {
         radiusX = Math.abs(e.changedTouches[0].clientX-x);
         radiusY = Math.abs(e.changedTouches[0].clientY-y);
-        ctx.beginPath(); //IMPORTANTÍSIMO EL BEGINPATH
-        ctx.lineWidth = 10;
-        ctx.clearRect(0,0,canvas1.width,canvas1.height);
-        ctx.ellipse(x,y,radiusX,radiusY,0,0,Math.PI*2,false);
-        ctx.stroke();
+        ctx2.beginPath(); //IMPORTANTÍSIMO EL BEGINPATH
+        ctx2.lineWidth = 10;
+        ctx2.clearRect(0,0,canvas1.width,canvas1.height);
+        ctx2.ellipse(x,y,radiusX,radiusY,0,0,Math.PI*2,false);
+        ctx2.stroke();
 
-        circles.forEach(x => {
+/*         circles.forEach(x => {
             x.shape();
-        })
+        }) */
     }
 
-    draw() {
-        playground.addEventListener('touchstart', e => {
-            x = e.changedTouches[0].clientX;
-            y = e. changedTouches[0].clientY;
-            playground.addEventListener('touchmove', this.drawCircleModel);
-        })
+    drawEnd() {
+        circles.push(new Circle(x,y,radiusX,radiusY));
+        ctx.beginPath();
+        ctx.lineWidth = 10;
+        ctx.ellipse(x,y,radiusX,radiusY,0,0,Math.PI*2,false);
+        ctx.stroke();
+        ctx.beginPath();
+    }
 
-        playground.addEventListener('touchend', () => {
-            circles.push(new Circle(x,y,radiusX,radiusY));
-            ctx.beginPath();
-        })
+    drawStart(ev) {
+        x = ev.changedTouches[0].clientX;
+        y = ev. changedTouches[0].clientY;
     }
 
 }

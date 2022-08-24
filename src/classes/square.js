@@ -3,6 +3,7 @@ const canvas1 = document.getElementById('draws_displayed');
 const ctx = canvas1.getContext('2d');
 
 const playground = document.getElementById('playground');
+const ctx2 = playground.getContext('2d');
 
 let x;
 let y;
@@ -30,38 +31,39 @@ export class Square {
         ctx.stroke(); */
     }
 
-    drawRectModel(e) {
+    draw(e) {
             //console.log(e.changedTouches[0].clientX);
             /* width=e.offsetX-x;
             height=e.offsetY-y; */
             width = e.changedTouches[0].clientX-x;
             height = e.changedTouches[0].clientY-y;
             //console.log(width, height);
-            ctx.beginPath(); //IMPORTANTÍSIMO EL BEGINPATH
-            ctx.lineWidth = 10;
-            ctx.clearRect(0,0,canvas1.width,canvas1.height);
-            ctx.rect(x,y,width,height);
-            ctx.stroke();
+            ctx2.beginPath(); //IMPORTANTÍSIMO EL BEGINPATH
+            ctx2.lineWidth = 10;
+            ctx2.clearRect(0,0,canvas1.width,canvas1.height);
+            ctx2.rect(x,y,width,height);
+            ctx2.stroke();
         
-        rectangles.forEach(element => {
+        /* rectangles.forEach(element => {
             //console.log(x)
                 element.shape();
-        })
+        }) */
 
     }
 
-    draw() {
-        playground.addEventListener('touchstart', e => {
-/*             x=e.offsetX;
-            y=e.offsetY; */
-            x = e.changedTouches[0].clientX;
-            y = e. changedTouches[0].clientY;
-            playground.addEventListener('touchmove', this.drawRectModel);
-        });
-        
-        playground.addEventListener('touchend', () => {
-            rectangles.push(new Square(x,y,width,height));
-            ctx.beginPath();
-        })
+    drawEnd() {
+        rectangles.push(new Square(x,y,width,height));
+        ctx.beginPath();
+        ctx.lineWidth = 10;
+        ctx.rect(x,y,width,height);
+        ctx.stroke();
+        ctx.beginPath();
+    }
+
+    drawStart(ev) {
+/*      x=e.offsetX;
+        y=e.offsetY; */
+        x = ev.changedTouches[0].clientX;
+        y = ev. changedTouches[0].clientY;
     }
 }

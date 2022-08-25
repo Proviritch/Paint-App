@@ -5,6 +5,8 @@ import { Pencil, Square, Circle, Line, Eraser } from '/src/classes/export_classe
 import './styles.css'
 //import { Circle } from './classes/circle';
 
+export const masterPiece = [];
+
 let canvas = document.getElementsByTagName('canvas');
 for(let i = 0; i < canvas.length; i++) {
     canvas[i].width = window.innerWidth;
@@ -43,24 +45,23 @@ const draw = new Draw();
 
 let section = document.querySelector('section');
 
-const selectOption = (option) => {
+const selectOption = e => {
 
-    section.children[option].addEventListener('click', e => {
-        draw.changeStrategy(strategies[e.target.attributes[0].nodeValue]);
+    draw.changeStrategy(strategies[e.target.attributes[0].nodeValue]);
 
-        playground.addEventListener('touchstart', ev => {
-            draw.drawStart(ev);
-            playground.addEventListener('touchmove', e => {
-                draw.draw(e);
-            })
+    playground.addEventListener('touchstart', ev => {
+        draw.drawStart(ev);
+        playground.addEventListener('touchmove', e => {
+            draw.draw(e);
         })
-
-        playground.addEventListener('touchend', e => {
-            draw.drawEnd();
-        })
-
-        
     })
+
+    playground.addEventListener('touchend', () => {
+        draw.drawEnd();
+        /* console.log('Holaaa')
+        console.log(masterPiece); */
+    })
+
 }
 
 
@@ -69,15 +70,15 @@ section.addEventListener('click', (e) => {
     if(!e.target.hasAttribute('value')) return
 
     //Free drawing
-    selectOption(0);
+    selectOption(e);
     //Square drawing
-    selectOption(1);
+    selectOption(e);
     //Circle drawing
-    selectOption(2);
+    selectOption(e);
     //Line drawing
-    selectOption(3);
+    selectOption(e);
     //Eraser
-    selectOption(4);
+    selectOption(e);
 
 })
 

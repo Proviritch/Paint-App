@@ -1,4 +1,4 @@
-
+import { masterPiece } from "..";
 const canvas1 = document.getElementById('draws_displayed');
 const ctx = canvas1.getContext('2d');
 
@@ -10,7 +10,7 @@ let y;
 let radiusX;
 let radiusY;
 
-let circles = [];
+let circles = ['circle'];
 
 
 export class Circle {
@@ -50,6 +50,17 @@ export class Circle {
         ctx.ellipse(x,y,radiusX,radiusY,0,0,Math.PI*2,false);
         ctx.stroke();
         ctx.beginPath();
+
+        circles.push({
+            x: x,
+            y: y,
+            radiusX: radiusX,
+            radiusY: radiusY,
+        });
+
+        masterPiece.push(circles);
+
+        console.log(masterPiece);
     }
 
     drawStart(ev) {

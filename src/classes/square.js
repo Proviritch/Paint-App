@@ -1,3 +1,4 @@
+import { masterPiece } from '../index.js';
 import { line } from './pencil.js'
 const canvas1 = document.getElementById('draws_displayed');
 const ctx = canvas1.getContext('2d');
@@ -10,7 +11,7 @@ let y;
 let width;
 let height;
 
-let rectangles = [];
+let rectangles = ['rectangle'];
 
 export class Square {
     constructor(x,y,width,height) {
@@ -59,6 +60,17 @@ export class Square {
         ctx.rect(x,y,width,height);
         ctx.stroke();
         ctx.beginPath();
+
+        rectangles.push({
+            x: x,
+            y: y,
+            width: width,
+            height: height
+        });
+        
+        masterPiece.push(rectangles);
+
+        console.log(masterPiece);
     }
 
     drawStart(ev) {

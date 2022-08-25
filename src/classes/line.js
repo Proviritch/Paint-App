@@ -32,7 +32,7 @@ export class Line {
 
         ctx2.clearRect(0,0,canvas1.width,canvas1.height);
         ctx2.beginPath(); //IMPORTANTÍSIMO EL BEGINPATH
-        ctx.lineCap = 'square';
+        ctx.lineCap = 'butt';
         ctx2.lineWidth = 10;
         ctx2.moveTo(xI,yI);
         ctx2.lineTo(xF,yF);
@@ -47,7 +47,7 @@ export class Line {
         ctx2.clearRect(0,0,canvas1.width,canvas1.height);
         lines.push(new Line(xI,yI,xF,yF));
         ctx.beginPath();
-        ctx.lineCap = 'square';
+        ctx.lineCap = 'butt';
         ctx.lineWidth = 10;
         ctx.moveTo(xI,yI);
         ctx.lineTo(xF,yF);

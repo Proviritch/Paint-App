@@ -34,3 +34,9 @@ div {
     background: rgb(255, 55, 55);
 }
 
+.step_back {
+    position: absolute;
+    right: 5%;
+    top: 3%;
+}
+

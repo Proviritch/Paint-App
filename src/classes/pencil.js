@@ -4,7 +4,7 @@ const ctx = canvas1.getContext('2d');
 
 const playground = document.getElementById('playground');
 
-const line = ['pecil'];
+let line = ['pecil'];
 
 export class Pencil {
 
@@ -16,7 +16,11 @@ export class Pencil {
         line.push({
             x: e.changedTouches[0].clientX,
             y: e.changedTouches[0].clientY
-        })
+        });
+
+        if(line[2]) {
+            if((line[line.length-1].x === line[line.length-2].x) && (line[line.length-1].y === line[line.length-2].y)) line.pop();
+        } 
                 
         ctx.lineTo(e.changedTouches[0].clientX,e.changedTouches[0].clientY);
         ctx.stroke();
@@ -27,11 +31,14 @@ export class Pencil {
 
     drawEnd() {
         //console.log('FIIIN')
+        //line = [... new Set(line)];
         masterPiece.push(line);
-        line[line.length-1].beginPath = true;
+/*         line = ['pencil'];
+        if(line[line.length-1] === 'pencil') line.pop(); */
+        //line[line.length-1].beginPath = true;
         ctx.beginPath();
 
-        console.log(masterPiece);
+        //console.log(masterPiece);
     }
 
     drawStart(ev) {

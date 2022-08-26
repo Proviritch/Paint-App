@@ -24,9 +24,7 @@ export class Eraser {
                 height: 50
             });
 
-            return erasers;
-
-            //masterPiece.push(erasers);
+            masterPiece.push(erasers);
 
             //console.log(masterPiece);;
     }

@@ -54,7 +54,7 @@ export class Square {
 
     drawEnd() {
         ctx2.clearRect(0,0,canvas1.width,canvas1.height);
-        rectangles.push(new Square(x,y,width,height));
+        //rectangles.push(new Square(x,y,width,height));
         ctx.beginPath();
         ctx.lineWidth = 10;
         ctx.rect(x,y,width,height);
@@ -67,10 +67,12 @@ export class Square {
             width: width,
             height: height
         });
+
+        if(rectangles[2]) rectangles.pop();
         
         masterPiece.push(rectangles);
 
-        console.log(masterPiece);
+        //console.log(masterPiece);
     }
 
     drawStart(ev) {

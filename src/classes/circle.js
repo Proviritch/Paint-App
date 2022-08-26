@@ -44,7 +44,7 @@ export class Circle {
 
     drawEnd() {
         ctx2.clearRect(0,0,canvas1.width,canvas1.height);
-        circles.push(new Circle(x,y,radiusX,radiusY));
+        //circles.push(new Circle(x,y,radiusX,radiusY));
         ctx.beginPath();
         ctx.lineWidth = 10;
         ctx.ellipse(x,y,radiusX,radiusY,0,0,Math.PI*2,false);
@@ -60,7 +60,7 @@ export class Circle {
 
         masterPiece.push(circles);
 
-        console.log(masterPiece);
+        //console.log(masterPiece);
     }
 
     drawStart(ev) {

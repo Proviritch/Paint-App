@@ -5,7 +5,7 @@ import { Pencil, Square, Circle, Line, Eraser } from '/src/classes/export_classe
 import './styles.css'
 //import { Circle } from './classes/circle';
 
-export const masterPiece = [];
+export let masterPiece = [];
 
 let canvas = document.getElementsByTagName('canvas');
 for(let i = 0; i < canvas.length; i++) {
@@ -58,8 +58,9 @@ const selectOption = e => {
 
     playground.addEventListener('touchend', () => {
         draw.drawEnd();
-        /* console.log('Holaaa')
-        console.log(masterPiece); */
+        masterPiece = [... new Set(masterPiece)];
+        console.log('Holaaa')
+        console.log(masterPiece);
     })
 
 }

@@ -67,10 +67,10 @@ export class Square {
             width: width,
             height: height
         });
-
-        if(rectangles[2]) rectangles.pop();
         
-        masterPiece.push(rectangles);
+        masterPiece.push([...rectangles]);
+
+        rectangles = ['rectangle'];
 
         //console.log(masterPiece);
     }

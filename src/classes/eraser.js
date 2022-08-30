@@ -13,18 +13,22 @@ export class Eraser {
         x = e.changedTouches[0].clientX-25;
         y = e.changedTouches[0].clientY-25;
         ctx.clearRect(x,y,50,50);
+        erasers.push({
+            x: x,
+            y: y,
+            width: 50,
+            height: 50
+        });
+        masterPiece.push([...erasers]);
+
+        erasers = ['eraser'];
     }
 
     drawEnd() {
             ctx.beginPath();
-            erasers.push({
-                x: x,
-                y: y,
-                width: 50,
-                height: 50
-            });
 
-            masterPiece.push(erasers);
+
+
 
             //console.log(masterPiece);;
     }

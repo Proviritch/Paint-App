@@ -1,7 +1,7 @@
 //import { saludar } from './js/componentes';
 /* import { Pencil } from './classes/pencil';
 import { Square } from './classes/square'; */
-import { Pencil, Square, Circle, Line, Eraser } from '/src/classes/export_classes.js'
+import { Pencil, Square, Circle, Line, Eraser} from '/src/classes/export_classes.js'
 import './styles.css'
 //import { Circle } from './classes/circle';
 
@@ -45,42 +45,52 @@ const draw = new Draw();
 
 let section = document.querySelector('section');
 
-const selectOption = e => {
-
-    draw.changeStrategy(strategies[e.target.attributes[0].nodeValue]);
+/* const selectOption = e => {
+    
+    //draw.changeStrategy(strategies[e]);
+    console.log(e);
 
     playground.addEventListener('touchstart', ev => {
         draw.drawStart(ev);
-        playground.addEventListener('touchmove', e => {
-            draw.draw(e);
-        })
+    })
+
+    playground.addEventListener('touchmove', e => {
+        draw.draw(e);
     })
 
     playground.addEventListener('touchend', () => {
         draw.drawEnd();
-        masterPiece = [... new Set(masterPiece)];
+        //masterPiece = [... new Set(masterPiece)];
         console.log('Holaaa')
         console.log(masterPiece);
+        console.log(e);
     })
 
-}
+} */
 
 
 section.addEventListener('click', (e) => {
-    //console.log(!e.target.hasAttribute('value'))
+
     if(!e.target.hasAttribute('value')) return
 
-    //Free drawing
-    selectOption(e);
-    //Square drawing
-    selectOption(e);
-    //Circle drawing
-    selectOption(e);
-    //Line drawing
-    selectOption(e);
-    //Eraser
-    selectOption(e);
+    draw.changeStrategy(strategies[e.target.attributes[0].nodeValue]);
 
+})
+
+playground.addEventListener('touchstart', ev => {
+    draw.drawStart(ev);
+})
+
+playground.addEventListener('touchmove', e => {
+    draw.draw(e);
+})
+
+playground.addEventListener('touchend', () => {
+    draw.drawEnd();
+    //masterPiece = [... new Set(masterPiece)];
+    console.log('Holaaa')
+    console.log(masterPiece);
+    //console.log(e);
 })
 
 

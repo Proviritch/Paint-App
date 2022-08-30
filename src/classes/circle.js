@@ -58,7 +58,8 @@ export class Circle {
             radiusY: radiusY,
         });
 
-        masterPiece.push(circles);
+        masterPiece.push([...circles]);
+        circles = ['circle']
 
         //console.log(masterPiece);
     }

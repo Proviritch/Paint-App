@@ -1,3 +1,4 @@
+import { masterPiece } from "..";
 
 const canvas1 = document.getElementById('draws_displayed');
 const ctx = canvas1.getContext('2d');
@@ -8,7 +9,7 @@ const ctx2 = playground.getContext('2d');
 let xI, xF;
 let yI, yF;
 
-let lines = [];
+let rectLine = ['rectLine'];
 
 export class Line {
 
@@ -45,7 +46,7 @@ export class Line {
 
     drawEnd() {
         ctx2.clearRect(0,0,canvas1.width,canvas1.height);
-        lines.push(new Line(xI,yI,xF,yF));
+        //lines.push(new Line(xI,yI,xF,yF));
         ctx.beginPath();
         ctx.lineCap = 'butt';
         ctx.lineWidth = 10;
@@ -53,6 +54,17 @@ export class Line {
         ctx.lineTo(xF,yF);
         ctx.stroke();
         ctx.beginPath();
+
+        rectLine.push({
+            xI: xI,
+            yI: yI,
+            xF: xF,
+            yF: yF 
+        });
+
+        masterPiece.push([...rectLine]);
+
+        rectLine = ['rectLine'];
     }
 
     drawStart(ev) {

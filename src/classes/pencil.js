@@ -32,7 +32,9 @@ export class Pencil {
     drawEnd() {
         //console.log('FIIIN')
         //line = [... new Set(line)];
-        masterPiece.push(line);
+        masterPiece.push([...line]);
+        line = ['pencil'];
+        //line = ['pencil'];
 /*         line = ['pencil'];
         if(line[line.length-1] === 'pencil') line.pop(); */
         //line[line.length-1].beginPath = true;

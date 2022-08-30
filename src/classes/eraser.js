@@ -6,6 +6,7 @@ const ctx = canvas1.getContext('2d');
 let x, y;
 
 let erasers = ['eraser'];
+let erasersAux = [];
 
 export class Eraser {
 
@@ -13,28 +14,35 @@ export class Eraser {
         x = e.changedTouches[0].clientX-25;
         y = e.changedTouches[0].clientY-25;
         ctx.clearRect(x,y,50,50);
-        erasers.push({
+        erasersAux.push({
             x: x,
             y: y,
             width: 50,
             height: 50
         });
-        masterPiece.push([...erasers]);
+        //masterPiece.push([...erasers]);
 
-        erasers = ['eraser'];
+        //erasers = ['eraser'];
     }
 
     drawEnd() {
-            ctx.beginPath();
-
-
-
-
+        ctx.beginPath();
+        erasers.push([...erasersAux]);
+        masterPiece.push([...erasers]);
+            
+        erasersAux = [];
+        erasers = ['eraser'];
             //console.log(masterPiece);;
     }
 
     drawStart(ev) {
 
+    }
+
+    drawCtrlZ(i) {
+        for(let k = 0; k < masterPiece[i][1].length; k++) {
+            ctx.clearRect(masterPiece[i][1][k].x,masterPiece[i][1][k].y,50,50);
+        }
     }
 
 }

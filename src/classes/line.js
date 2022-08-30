@@ -11,6 +11,8 @@ let yI, yF;
 
 let rectLine = ['rectLine'];
 
+let hasMoved = false;
+
 export class Line {
 
     constructor(xI,yI,xF,yF) {
@@ -28,6 +30,7 @@ export class Line {
     }
 
     draw(e) {
+        hasMoved = true;
         xF = e.changedTouches[0].clientX;
         yF = e.changedTouches[0].clientY;
 
@@ -45,31 +48,45 @@ export class Line {
     }
 
     drawEnd() {
-        ctx2.clearRect(0,0,canvas1.width,canvas1.height);
-        //lines.push(new Line(xI,yI,xF,yF));
-        ctx.beginPath();
-        ctx.lineCap = 'butt';
-        ctx.lineWidth = 10;
-        ctx.moveTo(xI,yI);
-        ctx.lineTo(xF,yF);
-        ctx.stroke();
-        ctx.beginPath();
+        if(hasMoved) {
+            hasMoved = false;
+            ctx2.clearRect(0,0,canvas1.width,canvas1.height);
+            //lines.push(new Line(xI,yI,xF,yF));
+            ctx.beginPath();
+            ctx.lineCap = 'butt';
+            ctx.lineWidth = 10;
+            ctx.moveTo(xI,yI);
+            ctx.lineTo(xF,yF);
+            ctx.stroke();
+            ctx.beginPath();
+    
+            rectLine.push({
+                xI: xI,
+                yI: yI,
+                xF: xF,
+                yF: yF 
+            });
+    
+            masterPiece.push([...rectLine]);
+    
+            rectLine = ['rectLine'];
+        }
 
-        rectLine.push({
-            xI: xI,
-            yI: yI,
-            xF: xF,
-            yF: yF 
-        });
-
-        masterPiece.push([...rectLine]);
-
-        rectLine = ['rectLine'];
     }
 
     drawStart(ev) {
         xI = ev.changedTouches[0].clientX;
         yI = ev.changedTouches[0].clientY;
+    }
+
+    drawCtrlZ(i) {
+        ctx.beginPath();
+        ctx.lineCap = 'butt';
+        ctx.lineWidth = 10;
+        ctx.moveTo(masterPiece[i][1].xI,masterPiece[i][1].yI);
+        ctx.lineTo(masterPiece[i][1].xF,masterPiece[i][1].yF);
+        ctx.stroke();
+        ctx.beginPath();
     }
 
 }

@@ -69,4 +69,12 @@ export class Circle {
         y = ev. changedTouches[0].clientY;
     }
 
+    drawCtrlZ(i) {
+        ctx.beginPath();
+        ctx.lineWidth = 10;
+        ctx.ellipse(masterPiece[i][1].x,masterPiece[i][1].y,masterPiece[i][1].radiusX,masterPiece[i][1].radiusY,0,0,Math.PI*2,false);
+        ctx.stroke();
+        ctx.beginPath();
+    }
+
 }

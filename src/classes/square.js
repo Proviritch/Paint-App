@@ -81,4 +81,12 @@ export class Square {
         x = ev.changedTouches[0].clientX;
         y = ev. changedTouches[0].clientY;
     }
+
+    drawCtrlZ(i) {
+        ctx.beginPath();
+        ctx.lineWidth = 10;
+        ctx.rect(masterPiece[i][1].x,masterPiece[i][1].y,masterPiece[i][1].width,masterPiece[i][1].height);
+        ctx.stroke();
+        ctx.beginPath();
+    }
 }

@@ -1,9 +1,7 @@
-//import { saludar } from './js/componentes';
-/* import { Pencil } from './classes/pencil';
-import { Square } from './classes/square'; */
+
 import { Pencil, Square, Circle, Line, Eraser} from '/src/classes/export_classes.js'
 import './styles.css'
-//import { Circle } from './classes/circle';
+
 
 export let masterPiece = [];
 
@@ -16,7 +14,7 @@ const playground = canvas[1];
 
 
 
-let strategies = [new Pencil(), new Square(), new Circle(), new Line(), new Eraser()];
+const strategies = [new Pencil(), new Square(), new Circle(), new Line(), new Eraser()];
 
 class Draw {
     constructor(strategy) {
@@ -37,6 +35,10 @@ class Draw {
 
     drawStart(ev) {
         return this.strategy.drawStart(ev);
+    }
+
+    drawCtrlZ(i) {
+        return this.strategy.drawCtrlZ(i);
     }
 
 }
@@ -68,12 +70,14 @@ let section = document.querySelector('section');
 
 } */
 
+let currentStrategy;
 
 section.addEventListener('click', (e) => {
 
     if(!e.target.hasAttribute('value')) return
 
     draw.changeStrategy(strategies[e.target.attributes[0].nodeValue]);
+    currentStrategy = strategies[e.target.attributes[0].nodeValue]
 
 })
 
@@ -91,6 +95,36 @@ playground.addEventListener('touchend', () => {
     console.log('Holaaa')
     console.log(masterPiece);
     //console.log(e);
+})
+
+
+
+const divCtrlZ = document.getElementById('ctrlZ');
+const strategiesCtrlZ = [
+    ['pencil', new Pencil()],
+    ['rectangle', new Square()],
+    ['circle', new Circle()],
+    ['rectLine', new Line()],
+    ['eraser', new Eraser()]
+]
+
+const ctx = canvas[0].getContext('2d');
+
+
+divCtrlZ.addEventListener('click', e => {
+    masterPiece.pop();
+    ctx.clearRect(0,0,canvas[0].width,canvas[0].height);
+
+    for(let i = 0; i < masterPiece.length; i++) {
+        for(let j = 0; j < strategiesCtrlZ.length; j++) {
+            if(masterPiece[i][0] === strategiesCtrlZ[j][0]) {
+                draw.changeStrategy(strategiesCtrlZ[j][1]);
+                draw.drawCtrlZ(i);
+            }
+        }
+    }
+
+    draw.changeStrategy(currentStrategy);
 })
 
 

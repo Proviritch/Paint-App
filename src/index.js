@@ -5,10 +5,12 @@ import './styles.css'
 
 export let masterPiece = [];
 
+const colorSection = document.getElementsByClassName('colors_section')[0];
+
 let canvas = document.getElementsByTagName('canvas');
 for(let i = 0; i < canvas.length; i++) {
     canvas[i].width = window.innerWidth;
-    canvas[i].height = window.innerHeight;
+    canvas[i].height = window.innerHeight - colorSection.offsetHeight;
 }
 const playground = canvas[1];
 
@@ -126,6 +128,8 @@ divCtrlZ.addEventListener('click', e => {
 
     draw.changeStrategy(currentStrategy);
 })
+
+
 
 
 

@@ -1,4 +1,4 @@
-import { masterPiece } from "..";
+import { masterPiece, color } from "..";
 const canvas1 = document.getElementById('draws_displayed');
 const ctx = canvas1.getContext('2d');
 
@@ -11,11 +11,13 @@ export class Pencil {
     draw(e) {
 
         ctx.lineWidth = 10;
+        ctx.strokeStyle = color;
         ctx.lineCap = 'round';
     
         line.push({
             x: e.changedTouches[0].clientX,
-            y: e.changedTouches[0].clientY
+            y: e.changedTouches[0].clientY,
+            strokeStyle: color
         });
                 
         ctx.lineTo(e.changedTouches[0].clientX,e.changedTouches[0].clientY);
@@ -47,6 +49,7 @@ export class Pencil {
         for(let k = 0; k < masterPiece[i].length; k++) {
             //
             ctx.lineWidth = 10;
+            ctx.strokeStyle = masterPiece[i][k].strokeStyle;
             ctx.lineCap = 'round';
             ctx.lineTo(masterPiece[i][k].x,masterPiece[i][k].y);
             ctx.stroke();

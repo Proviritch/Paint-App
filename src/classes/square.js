@@ -1,5 +1,4 @@
-import { masterPiece } from '../index.js';
-import { line } from './pencil.js'
+import { masterPiece, color } from '../index.js';
 const canvas1 = document.getElementById('draws_displayed');
 const ctx = canvas1.getContext('2d');
 
@@ -21,35 +20,15 @@ export class Square {
         this.height = height;
     }
 
-
-    shape() {
-
-        ctx.beginPath(); 
-        ctx.rect(this.x,this.y,this.width,this.height);
-        ctx.stroke();
-/*         ctx.beginPath(); 
-        ctx.rect(this.x,this.y,this.width,this.height);
-        ctx.stroke(); */
-    }
-
     draw(e) {
-            //console.log(e.changedTouches[0].clientX);
-            /* width=e.offsetX-x;
-            height=e.offsetY-y; */
             width = e.changedTouches[0].clientX-x;
             height = e.changedTouches[0].clientY-y;
-            //console.log(width, height);
             ctx2.beginPath(); //IMPORTANTÍSIMO EL BEGINPATH
             ctx2.lineWidth = 10;
+            ctx2.strokeStyle = color;
             ctx2.clearRect(0,0,canvas1.width,canvas1.height);
             ctx2.rect(x,y,width,height);
             ctx2.stroke();
-        
-        /* rectangles.forEach(element => {
-            //console.log(x)
-                element.shape();
-        }) */
-
     }
 
     drawEnd() {
@@ -57,6 +36,7 @@ export class Square {
         //rectangles.push(new Square(x,y,width,height));
         ctx.beginPath();
         ctx.lineWidth = 10;
+        ctx.strokeStyle = color;
         ctx.rect(x,y,width,height);
         ctx.stroke();
         ctx.beginPath();
@@ -65,7 +45,8 @@ export class Square {
             x: x,
             y: y,
             width: width,
-            height: height
+            height: height,
+            strokeStyle: color
         });
         
         masterPiece.push([...rectangles]);
@@ -85,6 +66,7 @@ export class Square {
     drawCtrlZ(i) {
         ctx.beginPath();
         ctx.lineWidth = 10;
+        ctx.strokeStyle = masterPiece[i][1].strokeStyle;
         ctx.rect(masterPiece[i][1].x,masterPiece[i][1].y,masterPiece[i][1].width,masterPiece[i][1].height);
         ctx.stroke();
         ctx.beginPath();

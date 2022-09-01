@@ -55,7 +55,7 @@ div {
 
 }
 
-.colors div {
+.color {
     width: 1rem;
     height: 1rem;
     border-radius: 100%;
@@ -63,3 +63,78 @@ div {
     display: inline-block;
 }
 
+#black {
+    background-color: black;
+}
+
+#gray {
+    background-color: gray;
+}
+
+#white {
+    background-color: white;
+}
+
+#crimson {
+    background-color: crimson;
+}
+
+#red {
+    background-color: red;
+}
+
+#orangered {
+    background-color: orangered;
+}
+
+#orange {
+    background-color: orange;
+}
+
+#gold {
+    background-color: gold;
+}
+
+#yellow {
+    background-color: yellow;
+}
+
+#lime {
+    background-color: lime;
+}
+
+#limegreen {
+    background-color: limegreen;
+}
+
+#green {
+    background-color: green;
+}
+
+#springgreen {
+    background-color: springgreen;
+}
+
+#cyan {
+    background-color: cyan;
+}
+
+#deepskyblue {
+    background-color: deepskyblue;
+}
+
+#blue {
+    background-color: blue;
+}
+
+#mediumslateblue {
+    background-color: mediumslateblue;
+}
+
+#magenta {
+    background-color: magenta;
+}
+
+#hotpink {
+    background-color: hotpink;
+}

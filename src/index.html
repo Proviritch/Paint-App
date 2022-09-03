@@ -9,17 +9,24 @@
 </head>
 <body>
     <main>
-        <canvas id="draws_displayed"></canvas>
-        <canvas id="playground"></canvas>
-        <section class="options" id="section">
+        <section class="moreToolsSection">
+            <div class="ctrlZ" id="ctrlZ"></div>
+            <div class="slidebar">
+                <div class="slide_ball"></div>
+            </div>
+        </section>
+        <section class="drawToolsSection" id="section">
             <div value="0" class="options-pencil"></div>
             <div value="1" class="options-square"></div>
             <div value="2" class="options-line"></div>
             <div value="3" class="options-circle"></div>
             <div value="4" class="options-eraser"></div>
         </section>
-        <div class="ctrlZ" id="ctrlZ"></div>
-        <section class="colors_section" id="section2">
+        <section class="canvasSection">
+            <canvas id="draws_displayed"></canvas>
+            <canvas id="playground"></canvas>
+        </section>
+<!--         <section class="colorSection" id="section2">
             <section class="colors">
                 <div class="color" id="black"></div>
                 <div class="color" id="gray"></div>
@@ -41,9 +48,7 @@
                 <div class="color" id="magenta"></div>
                 <div class="color" id="hotpink"></div>
             </section>
-        </section>
-    </main>
-
-    
+        </section> -->
+    </main> 
 </body>
 </html>

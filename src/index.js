@@ -5,12 +5,13 @@ import './styles.css'
 
 export let masterPiece = [];
 
-const colorSection = document.getElementsByClassName('colors_section')[0];
+const colorSection = document.querySelector('.colorSection');
+const moreToolsSection = document.querySelector('.moreToolsSection');
 
 let canvas = document.getElementsByTagName('canvas');
 for(let i = 0; i < canvas.length; i++) {
     canvas[i].width = window.innerWidth;
-    canvas[i].height = window.innerHeight - colorSection.offsetHeight;
+    canvas[i].height = window.innerHeight - colorSection.offsetHeight - moreToolsSection.offsetHeight;
 }
 const playground = canvas[1];
 
@@ -47,11 +48,11 @@ class Draw {
 
 const draw = new Draw();
 
-let section = document.querySelector('section');
+let drawToolsSection = document.querySelector('.drawToolsSection');
 
 let currentStrategy;
 
-section.addEventListener('click', (e) => {
+drawToolsSection.addEventListener('click', (e) => {
 
     if(!e.target.hasAttribute('value')) return
 
@@ -138,3 +139,10 @@ colorSection.addEventListener('click', e => {
     console.log(color);
 })
 
+//line width
+
+let bar = document.getElementsByTagName('input')[0];
+
+bar.addEventListener('change', e => {
+    console.log(e);
+})

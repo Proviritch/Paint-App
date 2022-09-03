@@ -9,23 +9,39 @@ body {
     height: 100vh;
 }
 
+main {
+    width: 100%;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 10% 90%;
+    grid-template-rows: 10% 85% 5%;
+    
+}
+
 canvas {
     position: absolute;
 }
 
-.options {
-    height: 95vh;
-    width: 12%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    padding: 10px;
-    position: relative;
+.moreToolsSection {
+    width: 100%;
+    height: 10vh;
+    grid-column-start: 1;
+    grid-column-end: -1;
 }
 
-.notSelected {
-    pointer-events: none;
+.drawToolsSection {
+    height: 85vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-evenly;
+
 }
+
+/* .notSelected {
+    pointer-events: none;
+} */
 
 div {
     width: 20px;
@@ -42,16 +58,19 @@ div {
 
 /*Section de colores*/
 
-.colors_section {
+.colorSection {
     height: 5vh;
     width: 100%;
+    grid-column-start: 1;
+    grid-column-end: -1;
     overflow: hidden;
     overflow-x: scroll;
 
 }
 
 .colors {
-    width: 200%;
+    width: 250%;
+    overflow: hidden;
 
 }
 
@@ -59,7 +78,7 @@ div {
     width: 1rem;
     height: 1rem;
     border-radius: 100%;
-    margin: 0.5rem;
+    margin:  0 0.5rem;
     display: inline-block;
 }
 
@@ -138,3 +157,17 @@ div {
 #hotpink {
     background-color: hotpink;
 }
+
+/*Slide bar*/
+
+.slidebar {
+    border-radius: 5px 5px;
+    width: 100px;
+    height: 5px;
+    background: rgb(21, 191, 247);
+    position: absolute;
+    top: 5%;
+    left: 5%;
+}
+
+

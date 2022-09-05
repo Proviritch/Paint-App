@@ -5,12 +5,14 @@ import './styles.css'
 
 export let masterPiece = [];
 
-const colorSection = document.querySelector('.colorSection');
-const moreToolsSection = document.querySelector('.moreToolsSection');
+export const colorSection = document.querySelector('.colorSection');
+export const moreToolsSection = document.querySelector('.moreToolsSection');
+export const drawToolsSection = document.querySelector('.drawToolsSection');
+
 
 let canvas = document.getElementsByTagName('canvas');
 for(let i = 0; i < canvas.length; i++) {
-    canvas[i].width = window.innerWidth;
+    canvas[i].width = window.innerWidth - drawToolsSection.offsetWidth;
     canvas[i].height = window.innerHeight - colorSection.offsetHeight - moreToolsSection.offsetHeight;
 }
 const playground = canvas[1];
@@ -48,8 +50,6 @@ class Draw {
 
 const draw = new Draw();
 
-let drawToolsSection = document.querySelector('.drawToolsSection');
-
 let currentStrategy;
 
 drawToolsSection.addEventListener('click', (e) => {
@@ -62,6 +62,7 @@ drawToolsSection.addEventListener('click', (e) => {
 })
 
 playground.addEventListener('touchstart', ev => {
+    console.log('aaaaa')
     draw.drawStart(ev);
 })
 

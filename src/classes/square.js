@@ -1,4 +1,4 @@
-import { masterPiece, color } from '../index.js';
+import { masterPiece, color, colorSection, moreToolsSection, drawToolsSection } from '../index.js';
 const canvas1 = document.getElementById('draws_displayed');
 const ctx = canvas1.getContext('2d');
 
@@ -21,8 +21,8 @@ export class Square {
     }
 
     draw(e) {
-            width = e.changedTouches[0].clientX-x;
-            height = e.changedTouches[0].clientY-y;
+            width = e.changedTouches[0].clientX-drawToolsSection.offsetWidth-x;
+            height = e.changedTouches[0].clientY-moreToolsSection.offsetHeight-y;
             ctx2.beginPath(); //IMPORTANTÍSIMO EL BEGINPATH
             ctx2.lineWidth = 10;
             ctx2.strokeStyle = color;
@@ -59,8 +59,8 @@ export class Square {
     drawStart(ev) {
 /*      x=e.offsetX;
         y=e.offsetY; */
-        x = ev.changedTouches[0].clientX;
-        y = ev. changedTouches[0].clientY;
+        x = ev.changedTouches[0].clientX-drawToolsSection.offsetWidth;
+        y = ev. changedTouches[0].clientY-moreToolsSection.offsetHeight;
     }
 
     drawCtrlZ(i) {

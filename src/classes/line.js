@@ -1,4 +1,4 @@
-import { masterPiece, color } from "..";
+import { masterPiece, color, colorSection, moreToolsSection, drawToolsSection } from "..";
 
 const canvas1 = document.getElementById('draws_displayed');
 const ctx = canvas1.getContext('2d');
@@ -31,8 +31,8 @@ export class Line {
 
     draw(e) {
         hasMoved = true;
-        xF = e.changedTouches[0].clientX;
-        yF = e.changedTouches[0].clientY;
+        xF = e.changedTouches[0].clientX-drawToolsSection.offsetWidth;
+        yF = e.changedTouches[0].clientY-moreToolsSection.offsetHeight;
 
         ctx2.clearRect(0,0,canvas1.width,canvas1.height);
         ctx2.beginPath(); //IMPORTANTÍSIMO EL BEGINPATH
@@ -78,8 +78,8 @@ export class Line {
     }
 
     drawStart(ev) {
-        xI = ev.changedTouches[0].clientX;
-        yI = ev.changedTouches[0].clientY;
+        xI = ev.changedTouches[0].clientX-drawToolsSection.offsetWidth;
+        yI = ev.changedTouches[0].clientY-moreToolsSection.offsetHeight;
     }
 
     drawCtrlZ(i) {

@@ -1,4 +1,4 @@
-import { masterPiece } from "..";
+import { masterPiece, colorSection, moreToolsSection, drawToolsSection } from "..";
 
 const canvas1 = document.getElementById('draws_displayed');
 const ctx = canvas1.getContext('2d');
@@ -11,8 +11,8 @@ let erasersAux = [];
 export class Eraser {
 
     draw(e) {
-        x = e.changedTouches[0].clientX-25;
-        y = e.changedTouches[0].clientY-25;
+        x = e.changedTouches[0].clientX-drawToolsSection.offsetWidth-25;
+        y = e.changedTouches[0].clientY-moreToolsSection.offsetHeight-25;
         ctx.clearRect(x,y,50,50);
         erasersAux.push({
             x: x,

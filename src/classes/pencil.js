@@ -1,4 +1,4 @@
-import { masterPiece, color } from "..";
+import { masterPiece, color, colorSection, moreToolsSection, drawToolsSection } from "..";
 const canvas1 = document.getElementById('draws_displayed');
 const ctx = canvas1.getContext('2d');
 
@@ -15,15 +15,15 @@ export class Pencil {
         ctx.lineCap = 'round';
     
         line.push({
-            x: e.changedTouches[0].clientX,
-            y: e.changedTouches[0].clientY,
+            x: e.changedTouches[0].clientX-drawToolsSection.offsetWidth,
+            y: e.changedTouches[0].clientY-moreToolsSection.offsetHeight,
             strokeStyle: color
         });
                 
-        ctx.lineTo(e.changedTouches[0].clientX,e.changedTouches[0].clientY);
+        ctx.lineTo(e.changedTouches[0].clientX-drawToolsSection.offsetWidth,e.changedTouches[0].clientY-moreToolsSection.offsetHeight);
         ctx.stroke();
         ctx.beginPath();
-        ctx.moveTo(e.changedTouches[0].clientX,e.changedTouches[0].clientY);
+        ctx.moveTo(e.changedTouches[0].clientX-drawToolsSection.offsetWidth,e.changedTouches[0].clientY-moreToolsSection.offsetHeight);
 
     }
 
@@ -42,6 +42,7 @@ export class Pencil {
     }
 
     drawStart(ev) {
+        console.log(ev)
         //console.log('ahhhh')
     }
 

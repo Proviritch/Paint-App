@@ -1,4 +1,4 @@
-import { masterPiece, color } from "..";
+import { masterPiece, color, colorSection, moreToolsSection, drawToolsSection } from "..";
 const canvas1 = document.getElementById('draws_displayed');
 const ctx = canvas1.getContext('2d');
 
@@ -25,8 +25,8 @@ export class Circle {
     }
 
     draw(e) {
-        radiusX = Math.abs(e.changedTouches[0].clientX-x);
-        radiusY = Math.abs(e.changedTouches[0].clientY-y);
+        radiusX = Math.abs(e.changedTouches[0].clientX-drawToolsSection.offsetWidth-x);
+        radiusY = Math.abs(e.changedTouches[0].clientY-moreToolsSection.offsetHeight-y);
         ctx2.beginPath(); //IMPORTANTÍSIMO EL BEGINPATH
         ctx2.strokeStyle = color;
         ctx2.lineWidth = 10;
@@ -62,8 +62,8 @@ export class Circle {
 
     drawStart(ev) {
         //ctx.strokeStyle = color;
-        x = ev.changedTouches[0].clientX;
-        y = ev. changedTouches[0].clientY;
+        x = ev.changedTouches[0].clientX-drawToolsSection.offsetWidth;
+        y = ev. changedTouches[0].clientY-moreToolsSection.offsetHeight;
     }
 
     drawCtrlZ(i) {

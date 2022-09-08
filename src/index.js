@@ -15,7 +15,7 @@ for(let i = 0; i < canvas.length; i++) {
     canvas[i].width = window.innerWidth - drawToolsSection.offsetWidth;
     canvas[i].height = window.innerHeight - colorSection.offsetHeight - moreToolsSection.offsetHeight;
 }
-const playground = canvas[1];
+const playground = document.getElementById('playground');
 
 
 //Drawing option section
@@ -55,7 +55,7 @@ let currentStrategy;
 drawToolsSection.addEventListener('click', (e) => {
 
     if(!e.target.hasAttribute('value')) return
-
+    console.log('asjkdaskjadhkas')
     draw.changeStrategy(strategies[e.target.attributes[0].nodeValue]);
     currentStrategy = strategies[e.target.attributes[0].nodeValue]
 
@@ -89,12 +89,13 @@ const strategiesCtrlZ = [
     ['eraser', new Eraser()]
 ]
 
-const ctx = canvas[0].getContext('2d');
+const drawsDisplayed = document.getElementById('draws_displayed');
+const ctx = drawsDisplayed.getContext('2d');
 
 
 divCtrlZ.addEventListener('click', e => {
     masterPiece.pop();
-    ctx.clearRect(0,0,canvas[0].width,canvas[0].height);
+    ctx.clearRect(0,0,drawsDisplayed.width,drawsDisplayed.height);
 
     for(let i = 0; i < masterPiece.length; i++) {
         for(let j = 0; j < strategiesCtrlZ.length; j++) {
@@ -140,10 +141,44 @@ colorSection.addEventListener('click', e => {
     console.log(color);
 })
 
-//line width
 
-let bar = document.getElementsByTagName('input')[0];
+//Slide bar 
 
-bar.addEventListener('change', e => {
-    console.log(e);
+const slideBar = document.getElementById('slide_bar');
+slideBar.width = 100;
+slideBar.height = 20;
+const ctxSB = slideBar.getContext('2d');
+
+const drawSlideBar = (x) => {
+    ctxSB.clearRect(0,0,slideBar.offsetWidth, slideBar.offsetHeight);
+    ctxSB.lineWidth = 5;
+    ctxSB.moveTo(0,slideBar.height/2);
+    ctxSB.lineTo(x,slideBar.height/2);
+    ctxSB.stroke();
+    ctxSB.beginPath();
+    ctxSB.ellipse(x,slideBar.height/2,10,10,0,Math.PI*2,false);
+    ctxSB.fill();
+    ctxSB.beginPath();
+}
+
+drawSlideBar(slideBar.width/2);
+
+
+slideBar.addEventListener('touchstart', e => {
+    console.log(e.changedTouches[0].clientX)
 })
+
+slideBar.addEventListener('touchmove', e => {
+    console.log(e.changedTouches[0].clientX-40);
+    if(e.changedTouches[0].clientX-40 < 90 && e.changedTouches[0].clientX-40 > 10) {
+        drawSlideBar(e.changedTouches[0].clientX-40);
+    }
+})
+
+
+
+
+
+
+
+

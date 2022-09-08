@@ -50,12 +50,6 @@ div {
     background: rgb(255, 55, 55);
 }
 
-.ctrlZ {
-    position: absolute;
-    right: 5%;
-    top: 3%;
-}
-
 /*Section de colores*/
 
 .colorSection {
@@ -158,16 +152,24 @@ div {
     background-color: hotpink;
 }
 
-/*Slide bar*/
+/*More tools section*/
+
+.moreToolsSection {
+    display: flex;
+    align-items: center;
+    padding-left: 2rem;
+}
+
+.ctrlZ {
+    margin-right: 2rem;
+}
 
 .slidebar {
-    border-radius: 5px 5px;
+    position: relative;
     width: 100px;
-    height: 5px;
-    background: rgb(21, 191, 247);
-    position: absolute;
-    top: 5%;
-    left: 5%;
+    height: 20px;
+    margin-right: 2rem;
 }
+
 
 

@@ -1,4 +1,4 @@
-import { masterPiece, color, colorSection, moreToolsSection, drawToolsSection } from "..";
+import { masterPiece, color, colorSection, moreToolsSection, drawToolsSection, mineLineWidth } from "..";
 const canvas1 = document.getElementById('draws_displayed');
 const ctx = canvas1.getContext('2d');
 
@@ -29,7 +29,7 @@ export class Circle {
         radiusY = Math.abs(e.changedTouches[0].clientY-moreToolsSection.offsetHeight-y);
         ctx2.beginPath(); //IMPORTANTÍSIMO EL BEGINPATH
         ctx2.strokeStyle = color;
-        ctx2.lineWidth = 10;
+        ctx2.lineWidth = mineLineWidth;
         ctx2.clearRect(0,0,canvas1.width,canvas1.height);
         ctx2.ellipse(x,y,radiusX,radiusY,0,0,Math.PI*2,false);
         ctx2.stroke();
@@ -40,7 +40,7 @@ export class Circle {
         ctx2.clearRect(0,0,canvas1.width,canvas1.height);
         //circles.push(new Circle(x,y,radiusX,radiusY));
         ctx.beginPath();
-        ctx.lineWidth = 10;
+        ctx.lineWidth = mineLineWidth;
         ctx.strokeStyle = color;
         ctx.ellipse(x,y,radiusX,radiusY,0,0,Math.PI*2,false);
         ctx.stroke();
@@ -51,7 +51,8 @@ export class Circle {
             y: y,
             radiusX: radiusX,
             radiusY: radiusY,
-            strokeStyle: color
+            strokeStyle: color,
+            lineWidth: mineLineWidth
         });
 
         masterPiece.push([...circles]);
@@ -68,7 +69,7 @@ export class Circle {
 
     drawCtrlZ(i) {
         ctx.beginPath();
-        ctx.lineWidth = 10;
+        ctx.lineWidth = masterPiece[i][1].lineWidth;
         ctx.strokeStyle = masterPiece[i][1].strokeStyle;
         ctx.ellipse(masterPiece[i][1].x,masterPiece[i][1].y,masterPiece[i][1].radiusX,masterPiece[i][1].radiusY,0,0,Math.PI*2,false);
         ctx.stroke();

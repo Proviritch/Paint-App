@@ -149,6 +149,8 @@ slideBar.width = 100;
 slideBar.height = 20;
 const ctxSB = slideBar.getContext('2d');
 
+export let mineLineWidth = 10;
+
 const drawSlideBar = (x) => {
     ctxSB.clearRect(0,0,slideBar.offsetWidth, slideBar.offsetHeight);
     ctxSB.lineWidth = 5;
@@ -165,16 +167,28 @@ drawSlideBar(slideBar.width/2);
 
 
 slideBar.addEventListener('touchstart', e => {
-    console.log(e.changedTouches[0].clientX)
-})
-
-slideBar.addEventListener('touchmove', e => {
-    console.log(e.changedTouches[0].clientX-40);
+    //console.log(e.changedTouches[0].clientX);
     if(e.changedTouches[0].clientX-40 < 90 && e.changedTouches[0].clientX-40 > 10) {
         drawSlideBar(e.changedTouches[0].clientX-40);
+        mineLineWidth = (e.changedTouches[0].clientX-40)/5;
     }
 })
 
+slideBar.addEventListener('touchmove', e => {
+    //console.log(e.changedTouches[0].clientX-40);
+    if(e.changedTouches[0].clientX-40 < 90 && e.changedTouches[0].clientX-40 > 10) {
+        drawSlideBar(e.changedTouches[0].clientX-40);
+    }
+    /* mineLineWidth = mineLineWidth > 20 ? mineLineWidth = 20 : 
+                    mineLineWidth < 0 ? mineLineWidth = 1 : 
+                    (e.changedTouches[0].clientX-40)/5; */
+    mineLineWidth = (e.changedTouches[0].clientX-40)/5;
+    if(mineLineWidth > 20) mineLineWidth = 20;
+    else if (mineLineWidth < 0) mineLineWidth = 1;
+    console.log(mineLineWidth);
+})
+
+//console.log(mineLineWidth);
 
 
 

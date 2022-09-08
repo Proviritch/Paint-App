@@ -1,4 +1,4 @@
-import { masterPiece, color, colorSection, moreToolsSection, drawToolsSection } from "..";
+import { masterPiece, color, colorSection, moreToolsSection, drawToolsSection, mineLineWidth } from "..";
 
 const canvas1 = document.getElementById('draws_displayed');
 const ctx = canvas1.getContext('2d');
@@ -22,13 +22,6 @@ export class Line {
         this.yF = yF;
     }
 
-    shape() {
-        ctx.beginPath(); 
-        ctx.moveTo(this.xI,this.yI);
-        ctx.lineTo(this.xF,this.yF);
-        ctx.stroke();
-    }
-
     draw(e) {
         hasMoved = true;
         xF = e.changedTouches[0].clientX-drawToolsSection.offsetWidth;
@@ -38,14 +31,10 @@ export class Line {
         ctx2.beginPath(); //IMPORTANTÍSIMO EL BEGINPATH
         ctx2.lineCap = 'round';
         ctx2.strokeStyle = color;
-        ctx2.lineWidth = 10;
+        ctx2.lineWidth = mineLineWidth;
         ctx2.moveTo(xI,yI);
         ctx2.lineTo(xF,yF);
         ctx2.stroke();
-
-        /* lines.forEach(x => {
-            x.shape();
-        }) */
     }
 
     drawEnd() {
@@ -56,7 +45,7 @@ export class Line {
             ctx.beginPath();
             ctx.lineCap = 'round';
             ctx.strokeStyle = color;
-            ctx.lineWidth = 10;
+            ctx.lineWidth = mineLineWidth;
             ctx.moveTo(xI,yI);
             ctx.lineTo(xF,yF);
             ctx.stroke();
@@ -67,7 +56,8 @@ export class Line {
                 yI: yI,
                 xF: xF,
                 yF: yF,
-                strokeStyle: color 
+                strokeStyle: color ,
+                lineWidth: mineLineWidth
             });
     
             masterPiece.push([...rectLine]);
@@ -85,12 +75,11 @@ export class Line {
     drawCtrlZ(i) {
         ctx.beginPath();
         ctx.lineCap = 'round';
-        ctx.lineWidth = 10;
+        ctx.lineWidth = masterPiece[i][1].lineWidth;
         ctx.strokeStyle = masterPiece[i][1].strokeStyle;
         ctx.moveTo(masterPiece[i][1].xI,masterPiece[i][1].yI);
         ctx.lineTo(masterPiece[i][1].xF,masterPiece[i][1].yF);
         ctx.stroke();
         ctx.beginPath();
     }
-
 }

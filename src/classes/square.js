@@ -1,4 +1,4 @@
-import { masterPiece, color, colorSection, moreToolsSection, drawToolsSection } from '../index.js';
+import { masterPiece, color, colorSection, moreToolsSection, drawToolsSection, mineLineWidth } from '../index.js';
 const canvas1 = document.getElementById('draws_displayed');
 const ctx = canvas1.getContext('2d');
 
@@ -24,7 +24,7 @@ export class Square {
             width = e.changedTouches[0].clientX-drawToolsSection.offsetWidth-x;
             height = e.changedTouches[0].clientY-moreToolsSection.offsetHeight-y;
             ctx2.beginPath(); //IMPORTANTÍSIMO EL BEGINPATH
-            ctx2.lineWidth = 10;
+            ctx2.lineWidth = mineLineWidth;
             ctx2.strokeStyle = color;
             ctx2.clearRect(0,0,canvas1.width,canvas1.height);
             ctx2.rect(x,y,width,height);
@@ -35,7 +35,7 @@ export class Square {
         ctx2.clearRect(0,0,canvas1.width,canvas1.height);
         //rectangles.push(new Square(x,y,width,height));
         ctx.beginPath();
-        ctx.lineWidth = 10;
+        ctx.lineWidth = mineLineWidth;
         ctx.strokeStyle = color;
         ctx.rect(x,y,width,height);
         ctx.stroke();
@@ -46,7 +46,8 @@ export class Square {
             y: y,
             width: width,
             height: height,
-            strokeStyle: color
+            strokeStyle: color,
+            lineWidth: mineLineWidth
         });
         
         masterPiece.push([...rectangles]);
@@ -65,7 +66,7 @@ export class Square {
 
     drawCtrlZ(i) {
         ctx.beginPath();
-        ctx.lineWidth = 10;
+        ctx.lineWidth = masterPiece[i][1].lineWidth;
         ctx.strokeStyle = masterPiece[i][1].strokeStyle;
         ctx.rect(masterPiece[i][1].x,masterPiece[i][1].y,masterPiece[i][1].width,masterPiece[i][1].height);
         ctx.stroke();

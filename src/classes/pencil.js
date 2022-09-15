@@ -30,25 +30,20 @@ export class Pencil {
 
     drawEnd() {
         //console.log('FIIIN')
-        //line = [... new Set(line)];
         masterPiece.push([...line]);
         line = ['pencil'];
-        //line = ['pencil'];
-/*         line = ['pencil'];
-        if(line[line.length-1] === 'pencil') line.pop(); */
-        //line[line.length-1].beginPath = true;
-        ctx.beginPath();
-
+        ctx.closePath();
         //console.log(masterPiece);
     }
 
     drawStart(ev) {
-        console.log(ev);
-        
+        //console.log(ev);
+        ctx.beginPath();
         //console.log('ahhhh')
     }
 
     drawCtrlZ(i) {
+        ctx.beginPath();
         for(let k = 0; k < masterPiece[i].length; k++) {
             //
             ctx.lineWidth = masterPiece[i][k].lineWidth;
@@ -61,7 +56,8 @@ export class Pencil {
             
         }
 
-        ctx.beginPath();
+        //ctx.beginPath();
+        ctx.closePath();
     }
 
 }

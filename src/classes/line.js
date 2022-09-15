@@ -49,7 +49,8 @@ export class Line {
             ctx.moveTo(xI,yI);
             ctx.lineTo(xF,yF);
             ctx.stroke();
-            ctx.beginPath();
+            ctx.closePath();
+            //ctx.beginPath();
     
             rectLine.push({
                 xI: xI,
@@ -70,6 +71,7 @@ export class Line {
     drawStart(ev) {
         xI = ev.changedTouches[0].clientX-drawToolsSection.offsetWidth;
         yI = ev.changedTouches[0].clientY-moreToolsSection.offsetHeight;
+        //ctx.beginPath()
     }
 
     drawCtrlZ(i) {
@@ -80,6 +82,7 @@ export class Line {
         ctx.moveTo(masterPiece[i][1].xI,masterPiece[i][1].yI);
         ctx.lineTo(masterPiece[i][1].xF,masterPiece[i][1].yF);
         ctx.stroke();
-        ctx.beginPath();
+        ctx.closePath();
+        //ctx.beginPath();
     }
 }

@@ -44,7 +44,7 @@ export class Circle {
         ctx.strokeStyle = color;
         ctx.ellipse(x,y,radiusX,radiusY,0,0,Math.PI*2,false);
         ctx.stroke();
-        ctx.beginPath();
+        //ctx.beginPath();
 
         circles.push({
             x: x,
@@ -65,6 +65,7 @@ export class Circle {
         //ctx.strokeStyle = color;
         x = ev.changedTouches[0].clientX-drawToolsSection.offsetWidth;
         y = ev. changedTouches[0].clientY-moreToolsSection.offsetHeight;
+        //ctx.beginPath();
     }
 
     drawCtrlZ(i) {
@@ -72,8 +73,21 @@ export class Circle {
         ctx.lineWidth = masterPiece[i][1].lineWidth;
         ctx.strokeStyle = masterPiece[i][1].strokeStyle;
         ctx.ellipse(masterPiece[i][1].x,masterPiece[i][1].y,masterPiece[i][1].radiusX,masterPiece[i][1].radiusY,0,0,Math.PI*2,false);
+        if(masterPiece[i][1].fillStyle) {
+            console.warn(masterPiece[i][1].fillStyle)
+            ctx.fillStyle = masterPiece[i][1].fillStyle;
+            ctx.fill();
+        }
         ctx.stroke();
-        ctx.beginPath();
+        ctx.closePath();
+        //ctx.beginPath();
+    }
+
+    fillColor() {
+        masterPiece[masterPiece.length-1][1].fillStyle = color;
+        ctx.fillStyle = color;
+        ctx.fill();
+        ctx.stroke();
     }
 
 }

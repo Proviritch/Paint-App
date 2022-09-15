@@ -46,23 +46,29 @@ class Draw {
         return this.strategy.drawCtrlZ(i);
     }
 
+    fillColor() {
+        return this.strategy.fillColor()
+    }
+
 }
 
 const draw = new Draw();
 
 let currentStrategy;
+let hasDoneCtrlZ = false;
 
 drawToolsSection.addEventListener('click', (e) => {
 
     if(!e.target.hasAttribute('value')) return
-    console.log('asjkdaskjadhkas')
+    //console.log('asjkdaskjadhkas')
     draw.changeStrategy(strategies[e.target.attributes[0].nodeValue]);
     currentStrategy = strategies[e.target.attributes[0].nodeValue]
 
 })
 
 playground.addEventListener('touchstart', ev => {
-    console.log('aaaaa')
+    //console.log('aaaaa')
+    hasDoneCtrlZ = false;
     draw.drawStart(ev);
 })
 
@@ -73,8 +79,8 @@ playground.addEventListener('touchmove', e => {
 playground.addEventListener('touchend', () => {
     draw.drawEnd();
     //masterPiece = [... new Set(masterPiece)];
-    console.log('Holaaa')
-    console.log(masterPiece);
+    //console.log('Holaaa')
+    //console.log(masterPiece);
     //console.log(e);
 })
 
@@ -93,9 +99,11 @@ const drawsDisplayed = document.getElementById('draws_displayed');
 const ctx = drawsDisplayed.getContext('2d');
 
 
+
 divCtrlZ.addEventListener('click', e => {
     masterPiece.pop();
     ctx.clearRect(0,0,drawsDisplayed.width,drawsDisplayed.height);
+    hasDoneCtrlZ = true;
 
     for(let i = 0; i < masterPiece.length; i++) {
         for(let j = 0; j < strategiesCtrlZ.length; j++) {
@@ -107,6 +115,7 @@ divCtrlZ.addEventListener('click', e => {
     }
 
     draw.changeStrategy(currentStrategy);
+    console.log(masterPiece);
 })
 
 //Color section
@@ -138,7 +147,7 @@ colorSection.addEventListener('click', e => {
     if(e.target.className !== 'color') return
 
     color = colorObject[e.target.id];
-    console.log(color);
+    //console.log(color);
 })
 
 
@@ -185,10 +194,25 @@ slideBar.addEventListener('touchmove', e => {
     mineLineWidth = (e.changedTouches[0].clientX-40)/5;
     if(mineLineWidth > 20) mineLineWidth = 20;
     else if (mineLineWidth < 0) mineLineWidth = 1;
-    console.log(mineLineWidth);
+    //console.log(mineLineWidth);
 })
 
 //console.log(mineLineWidth);
+
+//Fill Rect and Circle
+
+const fillTool = document.getElementById('fill');
+export let isFilled = false; 
+
+fillTool.addEventListener('click', e => {
+    console.log(!hasDoneCtrlZ);
+    if((masterPiece[masterPiece.length-1][0] === 'rectangle' || masterPiece[masterPiece.length-1][0] === 'circle') && !hasDoneCtrlZ ) {
+        console.warn()
+        isFilled = true;
+        draw.fillColor();
+    }
+    
+})
 
 
 

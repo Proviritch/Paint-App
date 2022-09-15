@@ -1,4 +1,4 @@
-import { masterPiece, color, colorSection, moreToolsSection, drawToolsSection, mineLineWidth } from '../index.js';
+import { masterPiece, color, colorSection, moreToolsSection, drawToolsSection, mineLineWidth, isFilled } from '../index.js';
 const canvas1 = document.getElementById('draws_displayed');
 const ctx = canvas1.getContext('2d');
 
@@ -39,7 +39,7 @@ export class Square {
         ctx.strokeStyle = color;
         ctx.rect(x,y,width,height);
         ctx.stroke();
-        ctx.beginPath();
+        //ctx.beginPath();
 
         rectangles.push({
             x: x,
@@ -62,6 +62,7 @@ export class Square {
         y=e.offsetY; */
         x = ev.changedTouches[0].clientX-drawToolsSection.offsetWidth;
         y = ev. changedTouches[0].clientY-moreToolsSection.offsetHeight;
+        //ctx.beginPath();
     }
 
     drawCtrlZ(i) {
@@ -69,7 +70,20 @@ export class Square {
         ctx.lineWidth = masterPiece[i][1].lineWidth;
         ctx.strokeStyle = masterPiece[i][1].strokeStyle;
         ctx.rect(masterPiece[i][1].x,masterPiece[i][1].y,masterPiece[i][1].width,masterPiece[i][1].height);
+        if(masterPiece[i][1].fillStyle) {
+            console.warn(masterPiece[i][1].fillStyle)
+            ctx.fillStyle = masterPiece[i][1].fillStyle;
+            ctx.fill();
+        }
         ctx.stroke();
-        ctx.beginPath();
+        ctx.closePath();
+        //ctx.beginPath();
+    }
+
+    fillColor() {
+        masterPiece[masterPiece.length-1][1].fillStyle = color;
+        ctx.fillStyle = color;
+        ctx.fill();
+        ctx.stroke();
     }
 }

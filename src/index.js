@@ -215,6 +215,62 @@ fillTool.addEventListener('click', e => {
 })
 
 
+//Background Section
+
+const fillBackground = document.getElementById('fill_background');
+const canvas_background = document.getElementById('canvas_background');
+const ctx3 = canvas_background.getContext('2d');
+let colorBackground;
+
+const paintBackground = (color = 'white') => {
+    ctx3.clearRect(0,0,canvas_background.width,canvas_background.height);
+    ctx3.fillStyle = color;
+    colorBackground = color;
+    ctx3.rect(0,0,canvas_background.width,canvas_background.height);
+    ctx3.fill();
+}
+
+paintBackground();
+
+
+fillBackground.addEventListener('click', e => {
+    paintBackground(color);
+/*     ctx3.clearRect(0,0,canvas_background.width,canvas_background.height);
+    ctx3.fillStyle = color;
+    colorBackground = color;
+    ctx3.rect(0,0,canvas_background.width,canvas_background.height);
+    ctx3.fill(); */
+    //drawsDisplayed.style.background = color;
+})
+
+
+//Descargar archivo
+
+const buttonDownload = document.getElementById('button_download');
+const linkDownload = document.getElementById('link_download');
+
+buttonDownload.addEventListener('click', () => {
+    let imgObj = new Image();
+
+    drawsDisplayed.toBlob(blob => {
+        let url = URL.createObjectURL(blob);
+        imgObj.src = url;
+
+        imgObj.onload = () => {
+            ctx3.drawImage(imgObj,0,0,canvas_background.width,canvas_background.height);
+            
+            canvas_background.toBlob(blob2 => {
+                let url2 = URL.createObjectURL(blob2);
+                linkDownload.href = url2;
+                linkDownload.click();
+                ctx3.clearRect(0,0,canvas_background.width,canvas_background.height);
+                paintBackground(colorBackground);
+            })
+        }
+    })
+})
+
+
 
 
 

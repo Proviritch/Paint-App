@@ -47,7 +47,16 @@ div {
     width: 20px;
     height: 20px;
     border-radius: 100%;
-    background: rgb(255, 55, 55);
+   /*  background: rgb(255, 55, 55); */
+}
+
+.drawToolsSection div {
+    background: none;
+}
+
+img {
+    width: 100%;
+    height: 100%;
 }
 
 /*Section de colores*/
@@ -59,21 +68,49 @@ div {
     grid-column-end: -1;
     overflow: hidden;
     overflow-x: scroll;
-
+    background-color: black;
+    
 }
 
 .colors {
-    width: 250%;
+    width: 300%;
+    height: 5vh;
+    display: flex;
+    scroll-behavior: smooth;
+    /* scroll-snap-type: y mandatory; */
     /* overflow: hidden; */
 
+}
+
+.colors_article {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    
+}
+
+@media (min-width: 1024px) {
+    .colors {
+        width: 100%;
+    }
+
+    .colors_article {
+        width: 320px;
+    }
+
+    .colorSection {
+        overflow-x: hidden;
+    }
 }
 
 .color {
     width: 1rem;
     height: 1rem;
     border-radius: 100%;
-    margin:  0 0.5rem;
+    /* margin:  0 0.5rem; */
     display: inline-block;
+    border: 1px solid white;
 }
 
 #black {
@@ -152,7 +189,42 @@ div {
     background-color: hotpink;
 }
 
+#lightgoldenrodyellow {
+    background-color: lightgoldenrodyellow;
+}
+
+#lightsalmon {
+    background-color: lightsalmon;
+}
+
+#midnightblue {
+    background-color: midnightblue;
+}
+
+#olive {
+    background-color: olive;
+}
+
+#navajowhite {
+    background-color: navajowhite;
+}
+
+#peru {
+    background-color: peru;
+}
+
+#seagreen {
+    background-color: seagreen;
+}
+
+#thistle {
+    background-color: thistle;
+}
 /*More tools section*/
+
+.ctrlZ, .slidebar, .fill, .fill_background { 
+    margin-right: 1.5rem;
+}
 
 .moreToolsSection {
     display: flex;
@@ -160,19 +232,16 @@ div {
     padding-left: 2rem;
 }
 
-.ctrlZ {
-    margin-right: 2rem;
-}
+/* .ctrlZ {
+    
+} */
 
 .slidebar {
     position: relative;
     width: 100px;
     height: 20px;
-    margin-right: 2rem;
+    /* margin-right: 2rem; */
 }
 
-.fill {
-    margin-right: 2rem;
-}
 
 

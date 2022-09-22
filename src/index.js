@@ -59,15 +59,13 @@ let hasDoneCtrlZ = false;
 
 drawToolsSection.addEventListener('click', (e) => {
 
-    if(!e.target.hasAttribute('value')) return
-    //console.log('asjkdaskjadhkas')
-    draw.changeStrategy(strategies[e.target.attributes[0].nodeValue]);
-    currentStrategy = strategies[e.target.attributes[0].nodeValue]
+    if(!e.target.parentElement.hasAttribute('value')) return
+    draw.changeStrategy(strategies[e.target.parentElement.attributes[0].nodeValue]);
+    currentStrategy = strategies[e.target.parentElement.attributes[0].nodeValue]
 
 })
 
 playground.addEventListener('touchstart', ev => {
-    //console.log('aaaaa')
     hasDoneCtrlZ = false;
     draw.drawStart(ev);
 })
@@ -78,10 +76,18 @@ playground.addEventListener('touchmove', e => {
 
 playground.addEventListener('touchend', () => {
     draw.drawEnd();
-    //masterPiece = [... new Set(masterPiece)];
-    //console.log('Holaaa')
-    //console.log(masterPiece);
-    //console.log(e);
+})
+
+playground.addEventListener('mousedown', ev => {
+    hasDoneCtrlZ = false;
+    draw.drawStart(ev);
+    playground.addEventListener('mousemove', e => {
+        draw.draw(e);
+    })
+})
+
+playground.addEventListener('mouseup', e => {
+    draw.drawEnd();
 })
 
 
@@ -138,7 +144,15 @@ export const colorObject = {
     blue: 'blue',
     mediumslateblue: 'mediumslateblue',
     magenta: 'magenta',
-    hotpink: 'hotpink'
+    hotpink: 'hotpink',
+    lightgoldenrodyellow: 'lightgoldenrodyellow',
+    lightsalmon: 'lightsalmon',
+    midnightblue: 'midnightblue',
+    olive: 'olive',
+    navajowhite: 'navajowhite',
+    peru: 'peru',
+    seagreen: 'seagreen',
+    thistle: 'thistle'
 }
 
 export let color = colorObject.black;
@@ -162,8 +176,9 @@ export let mineLineWidth = 10;
 
 const drawSlideBar = (x) => {
     ctxSB.clearRect(0,0,slideBar.offsetWidth, slideBar.offsetHeight);
+    ctxSB.lineCap = 'round';
     ctxSB.lineWidth = 5;
-    ctxSB.moveTo(0,slideBar.height/2);
+    ctxSB.moveTo(5,slideBar.height/2);
     ctxSB.lineTo(x,slideBar.height/2);
     ctxSB.stroke();
     ctxSB.beginPath();

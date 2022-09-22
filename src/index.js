@@ -30,16 +30,16 @@ class Draw {
         this.strategy = strategy;
     }
 
-    draw(e) {
-        return this.strategy.draw(e);
+    draw(eX, eY) {
+        return this.strategy.draw(eX, eY);
     }
 
     drawEnd() {
         return this.strategy.drawEnd();
     }
 
-    drawStart(ev) {
-        return this.strategy.drawStart(ev);
+    drawStart(evX, evY) {
+        return this.strategy.drawStart(evX, evY);
     }
 
     drawCtrlZ(i) {
@@ -67,27 +67,30 @@ drawToolsSection.addEventListener('click', (e) => {
 
 playground.addEventListener('touchstart', ev => {
     hasDoneCtrlZ = false;
-    draw.drawStart(ev);
+    draw.drawStart(ev.changedTouches[0].clientX,ev.changedTouches[0].clientY);
 })
 
 playground.addEventListener('touchmove', e => {
-    draw.draw(e);
+    draw.draw(e.changedTouches[0].clientX,e.changedTouches[0].clientY);
 })
 
 playground.addEventListener('touchend', () => {
     draw.drawEnd();
 })
 
+const mousemoveFunction = (e) => {
+    draw.draw(e.clientX,e.clientY);
+}
+
 playground.addEventListener('mousedown', ev => {
     hasDoneCtrlZ = false;
-    draw.drawStart(ev);
-    playground.addEventListener('mousemove', e => {
-        draw.draw(e);
-    })
+    draw.drawStart(ev.clientX,ev.clientY);
+    playground.addEventListener('mousemove', mousemoveFunction)
 })
 
 playground.addEventListener('mouseup', e => {
     draw.drawEnd();
+    playground.removeEventListener('mousemove', mousemoveFunction);
 })
 
 
@@ -121,7 +124,6 @@ divCtrlZ.addEventListener('click', e => {
     }
 
     draw.changeStrategy(currentStrategy);
-    console.log(masterPiece);
 })
 
 //Color section
@@ -161,7 +163,6 @@ colorSection.addEventListener('click', e => {
     if(e.target.className !== 'color') return
 
     color = colorObject[e.target.id];
-    //console.log(color);
 })
 
 
@@ -191,7 +192,6 @@ drawSlideBar(slideBar.width/2);
 
 
 slideBar.addEventListener('touchstart', e => {
-    //console.log(e.changedTouches[0].clientX);
     if(e.changedTouches[0].clientX-40 < 90 && e.changedTouches[0].clientX-40 > 10) {
         drawSlideBar(e.changedTouches[0].clientX-40);
         mineLineWidth = (e.changedTouches[0].clientX-40)/5;
@@ -199,20 +199,35 @@ slideBar.addEventListener('touchstart', e => {
 })
 
 slideBar.addEventListener('touchmove', e => {
-    //console.log(e.changedTouches[0].clientX-40);
     if(e.changedTouches[0].clientX-40 < 90 && e.changedTouches[0].clientX-40 > 10) {
         drawSlideBar(e.changedTouches[0].clientX-40);
     }
-    /* mineLineWidth = mineLineWidth > 20 ? mineLineWidth = 20 : 
-                    mineLineWidth < 0 ? mineLineWidth = 1 : 
-                    (e.changedTouches[0].clientX-40)/5; */
     mineLineWidth = (e.changedTouches[0].clientX-40)/5;
     if(mineLineWidth > 20) mineLineWidth = 20;
     else if (mineLineWidth < 0) mineLineWidth = 1;
-    //console.log(mineLineWidth);
 })
 
-//console.log(mineLineWidth);
+const sliderMouseFunction = e => {
+    if(e.clientX-40 < 90 && e.clientX-40 > 10) {
+        drawSlideBar(e.clientX-40);
+    }
+    mineLineWidth = (e.clientX-40)/5;
+    if(mineLineWidth > 20) mineLineWidth = 20;
+    else if (mineLineWidth < 0) mineLineWidth = 1;
+}
+
+slideBar.addEventListener('mousedown', e => {
+    if(e.clientX-40 < 90 && e.clientY-40 > 10) {
+        drawSlideBar(e.clientX-40);
+        mineLineWidth = (e.clientX-40)/5;
+    }
+    slideBar.addEventListener('mousemove', sliderMouseFunction);
+})
+
+slideBar.addEventListener('mouseup', () => {
+    slideBar.removeEventListener('mousemove',sliderMouseFunction);
+})
+
 
 //Fill Rect and Circle
 
@@ -220,9 +235,8 @@ const fillTool = document.getElementById('fill');
 export let isFilled = false; 
 
 fillTool.addEventListener('click', e => {
-    console.log(!hasDoneCtrlZ);
     if((masterPiece[masterPiece.length-1][0] === 'rectangle' || masterPiece[masterPiece.length-1][0] === 'circle') && !hasDoneCtrlZ ) {
-        console.warn()
+
         isFilled = true;
         draw.fillColor();
     }
@@ -250,12 +264,6 @@ paintBackground();
 
 fillBackground.addEventListener('click', e => {
     paintBackground(color);
-/*     ctx3.clearRect(0,0,canvas_background.width,canvas_background.height);
-    ctx3.fillStyle = color;
-    colorBackground = color;
-    ctx3.rect(0,0,canvas_background.width,canvas_background.height);
-    ctx3.fill(); */
-    //drawsDisplayed.style.background = color;
 })
 
 

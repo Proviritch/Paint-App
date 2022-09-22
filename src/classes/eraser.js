@@ -10,9 +10,9 @@ let erasersAux = [];
 
 export class Eraser {
 
-    draw(e) {
-        x = e.changedTouches[0].clientX-drawToolsSection.offsetWidth-25;
-        y = e.changedTouches[0].clientY-moreToolsSection.offsetHeight-25;
+    draw(eX,eY) {
+        x = eX-drawToolsSection.offsetWidth-25;
+        y = eY-moreToolsSection.offsetHeight-25;
         ctx.clearRect(x,y,50,50);
         erasersAux.push({
             x: x,
@@ -20,9 +20,6 @@ export class Eraser {
             width: 50,
             height: 50
         });
-        //masterPiece.push([...erasers]);
-
-        //erasers = ['eraser'];
     }
 
     drawEnd() {
@@ -32,10 +29,9 @@ export class Eraser {
             
         erasersAux = [];
         erasers = ['eraser'];
-            //console.log(masterPiece);;
     }
 
-    drawStart(ev) {
+    drawStart(evX,evY) {
 
     }
 

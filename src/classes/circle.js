@@ -11,8 +11,6 @@ let radiusX;
 let radiusY;
 
 let circles = ['circle'];
-//ctx.strokeStyle = color;
-//ctx2.strokeStyle = color;
 
 
 export class Circle {
@@ -24,9 +22,9 @@ export class Circle {
         this.radiusY = radiusY;
     }
 
-    draw(e) {
-        radiusX = Math.abs(e.changedTouches[0].clientX-drawToolsSection.offsetWidth-x);
-        radiusY = Math.abs(e.changedTouches[0].clientY-moreToolsSection.offsetHeight-y);
+    draw(eX,eY) {
+        radiusX = Math.abs(eX-drawToolsSection.offsetWidth-x);
+        radiusY = Math.abs(eY-moreToolsSection.offsetHeight-y);
         ctx2.beginPath(); //IMPORTANTÍSIMO EL BEGINPATH
         ctx2.strokeStyle = color;
         ctx2.lineWidth = mineLineWidth;
@@ -38,13 +36,11 @@ export class Circle {
 
     drawEnd() {
         ctx2.clearRect(0,0,canvas1.width,canvas1.height);
-        //circles.push(new Circle(x,y,radiusX,radiusY));
         ctx.beginPath();
         ctx.lineWidth = mineLineWidth;
         ctx.strokeStyle = color;
         ctx.ellipse(x,y,radiusX,radiusY,0,0,Math.PI*2,false);
         ctx.stroke();
-        //ctx.beginPath();
 
         circles.push({
             x: x,
@@ -57,15 +53,11 @@ export class Circle {
 
         masterPiece.push([...circles]);
         circles = ['circle']
-
-        //console.log(masterPiece);
     }
 
-    drawStart(ev) {
-        //ctx.strokeStyle = color;
-        x = ev.changedTouches[0].clientX-drawToolsSection.offsetWidth;
-        y = ev. changedTouches[0].clientY-moreToolsSection.offsetHeight;
-        //ctx.beginPath();
+    drawStart(evX,evY) {
+        x = evX-drawToolsSection.offsetWidth;
+        y = evY-moreToolsSection.offsetHeight;
     }
 
     drawCtrlZ(i) {
@@ -74,13 +66,11 @@ export class Circle {
         ctx.strokeStyle = masterPiece[i][1].strokeStyle;
         ctx.ellipse(masterPiece[i][1].x,masterPiece[i][1].y,masterPiece[i][1].radiusX,masterPiece[i][1].radiusY,0,0,Math.PI*2,false);
         if(masterPiece[i][1].fillStyle) {
-            console.warn(masterPiece[i][1].fillStyle)
             ctx.fillStyle = masterPiece[i][1].fillStyle;
             ctx.fill();
         }
         ctx.stroke();
         ctx.closePath();
-        //ctx.beginPath();
     }
 
     fillColor() {

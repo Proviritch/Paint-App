@@ -8,38 +8,34 @@ let line = ['pencil'];
 
 export class Pencil {
 
-    draw(e) {
+    draw(eX, eY) {
 
         ctx.lineWidth = mineLineWidth;
         ctx.strokeStyle = color;
         ctx.lineCap = 'round';
     
         line.push({
-            x: e.changedTouches[0].clientX-drawToolsSection.offsetWidth,
-            y: e.changedTouches[0].clientY-moreToolsSection.offsetHeight,
+            x: eX-drawToolsSection.offsetWidth,
+            y: eY-moreToolsSection.offsetHeight,
             strokeStyle: color,
             lineWidth: mineLineWidth
         });
                 
-        ctx.lineTo(e.changedTouches[0].clientX-drawToolsSection.offsetWidth,e.changedTouches[0].clientY-moreToolsSection.offsetHeight);
+        ctx.lineTo(eX-drawToolsSection.offsetWidth,eY-moreToolsSection.offsetHeight);
         ctx.stroke();
         ctx.beginPath();
-        ctx.moveTo(e.changedTouches[0].clientX-drawToolsSection.offsetWidth,e.changedTouches[0].clientY-moreToolsSection.offsetHeight);
+        ctx.moveTo(eX-drawToolsSection.offsetWidth,eY-moreToolsSection.offsetHeight);
 
     }
 
     drawEnd() {
-        //console.log('FIIIN')
         masterPiece.push([...line]);
         line = ['pencil'];
         ctx.closePath();
-        //console.log(masterPiece);
     }
 
-    drawStart(ev) {
-        //console.log(ev);
+    drawStart(evX, evY) {
         ctx.beginPath();
-        //console.log('ahhhh')
     }
 
     drawCtrlZ(i) {
@@ -56,7 +52,6 @@ export class Pencil {
             
         }
 
-        //ctx.beginPath();
         ctx.closePath();
     }
 

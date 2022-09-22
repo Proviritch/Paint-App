@@ -20,9 +20,9 @@ export class Square {
         this.height = height;
     }
 
-    draw(e) {
-            width = e.changedTouches[0].clientX-drawToolsSection.offsetWidth-x;
-            height = e.changedTouches[0].clientY-moreToolsSection.offsetHeight-y;
+    draw(eX, eY) {
+            width = eX-drawToolsSection.offsetWidth-x;
+            height = eY-moreToolsSection.offsetHeight-y;
             ctx2.beginPath(); //IMPORTANTÍSIMO EL BEGINPATH
             ctx2.lineWidth = mineLineWidth;
             ctx2.strokeStyle = color;
@@ -33,13 +33,11 @@ export class Square {
 
     drawEnd() {
         ctx2.clearRect(0,0,canvas1.width,canvas1.height);
-        //rectangles.push(new Square(x,y,width,height));
         ctx.beginPath();
         ctx.lineWidth = mineLineWidth;
         ctx.strokeStyle = color;
         ctx.rect(x,y,width,height);
         ctx.stroke();
-        //ctx.beginPath();
 
         rectangles.push({
             x: x,
@@ -53,16 +51,11 @@ export class Square {
         masterPiece.push([...rectangles]);
 
         rectangles = ['rectangle'];
-
-        //console.log(masterPiece);
     }
 
-    drawStart(ev) {
-/*      x=e.offsetX;
-        y=e.offsetY; */
-        x = ev.changedTouches[0].clientX-drawToolsSection.offsetWidth;
-        y = ev. changedTouches[0].clientY-moreToolsSection.offsetHeight;
-        //ctx.beginPath();
+    drawStart(evX, evY) {
+        x = evX-drawToolsSection.offsetWidth;
+        y = evY-moreToolsSection.offsetHeight;
     }
 
     drawCtrlZ(i) {
@@ -71,13 +64,11 @@ export class Square {
         ctx.strokeStyle = masterPiece[i][1].strokeStyle;
         ctx.rect(masterPiece[i][1].x,masterPiece[i][1].y,masterPiece[i][1].width,masterPiece[i][1].height);
         if(masterPiece[i][1].fillStyle) {
-            console.warn(masterPiece[i][1].fillStyle)
             ctx.fillStyle = masterPiece[i][1].fillStyle;
             ctx.fill();
         }
         ctx.stroke();
         ctx.closePath();
-        //ctx.beginPath();
     }
 
     fillColor() {

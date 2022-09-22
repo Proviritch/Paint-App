@@ -22,10 +22,10 @@ export class Line {
         this.yF = yF;
     }
 
-    draw(e) {
+    draw(eX,eY) {
         hasMoved = true;
-        xF = e.changedTouches[0].clientX-drawToolsSection.offsetWidth;
-        yF = e.changedTouches[0].clientY-moreToolsSection.offsetHeight;
+        xF = eX-drawToolsSection.offsetWidth;
+        yF = eY-moreToolsSection.offsetHeight;
 
         ctx2.clearRect(0,0,canvas1.width,canvas1.height);
         ctx2.beginPath(); //IMPORTANTÍSIMO EL BEGINPATH
@@ -41,7 +41,6 @@ export class Line {
         if(hasMoved) {
             hasMoved = false;
             ctx2.clearRect(0,0,canvas1.width,canvas1.height);
-            //lines.push(new Line(xI,yI,xF,yF));
             ctx.beginPath();
             ctx.lineCap = 'round';
             ctx.strokeStyle = color;
@@ -50,7 +49,6 @@ export class Line {
             ctx.lineTo(xF,yF);
             ctx.stroke();
             ctx.closePath();
-            //ctx.beginPath();
     
             rectLine.push({
                 xI: xI,
@@ -68,10 +66,9 @@ export class Line {
 
     }
 
-    drawStart(ev) {
-        xI = ev.changedTouches[0].clientX-drawToolsSection.offsetWidth;
-        yI = ev.changedTouches[0].clientY-moreToolsSection.offsetHeight;
-        //ctx.beginPath()
+    drawStart(evX,evY) {
+        xI = evX-drawToolsSection.offsetWidth;
+        yI = evY-moreToolsSection.offsetHeight;
     }
 
     drawCtrlZ(i) {
@@ -83,6 +80,5 @@ export class Line {
         ctx.lineTo(masterPiece[i][1].xF,masterPiece[i][1].yF);
         ctx.stroke();
         ctx.closePath();
-        //ctx.beginPath();
     }
 }
